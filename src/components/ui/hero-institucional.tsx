@@ -63,7 +63,7 @@ export const Hero = React.memo(() => {
   return (
     <section
       id="hero"
-      className="relative min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center px-6 py-16 md:py-20 text-center"
+      className="relative flex flex-col items-center justify-start px-6 pt-14 pb-4 md:pt-20 md:pb-6 text-center"
       style={{ animation: "fadeIn 0.6s ease-out" }}
     >
       <style>{`
@@ -73,14 +73,14 @@ export const Hero = React.memo(() => {
         }
       `}</style>
 
-      <aside className="mb-8 inline-flex flex-wrap items-center justify-center gap-2 px-4 py-2 rounded-full border border-gray-700 bg-gray-800/50 backdrop-blur-sm max-w-full">
+      <aside className="mb-6 inline-flex flex-wrap items-center justify-center gap-2 px-4 py-2 rounded-full border border-gray-700 bg-gray-800/50 backdrop-blur-sm max-w-full">
         <span className="text-xs text-center whitespace-nowrap" style={{ color: "#9ca3af" }}>
           Tecnologia, performance e crescimento digital
         </span>
       </aside>
 
       <h1
-        className="text-4xl md:text-5xl lg:text-6xl font-medium text-center max-w-3xl px-6 leading-tight mb-6"
+        className="text-4xl md:text-5xl lg:text-6xl font-medium text-center max-w-3xl px-6 leading-tight mb-5"
         style={{
           background: "linear-gradient(to bottom, #ffffff, #ffffff, rgba(255, 255, 255, 0.6))",
           WebkitBackgroundClip: "text",
@@ -95,7 +95,7 @@ export const Hero = React.memo(() => {
       </h1>
 
       <p
-        className="text-sm md:text-base text-center max-w-2xl px-6 mb-10"
+        className="text-sm md:text-base text-center max-w-2xl px-6 mb-8"
         style={{ color: "#9ca3af" }}
       >
         A Neurautomation reúne automação com IA, performance em Google Ads, produção de
@@ -104,7 +104,7 @@ export const Hero = React.memo(() => {
         e marketing digital em quatro frentes que operam de forma integrada.
       </p>
 
-      <div className="flex items-center gap-4 relative z-10 mb-8">
+      <div className="flex items-center gap-4 relative z-10 mb-2">
         <Button
           type="button"
           variant="gradient"
