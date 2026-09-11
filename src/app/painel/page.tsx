@@ -25,6 +25,18 @@ export default async function PainelPage() {
     redirect("/login");
   }
 
+  const { data: roleCheck } = await supabase
+    .from("user_roles")
+    .select("role")
+    .eq("user_id", user.id)
+    .eq("role", "admin")
+    .maybeSingle();
+  const isAdmin = !!roleCheck;
+
+  if (isAdmin) {
+    redirect("/admin/overview");
+  }
+
   return (
     <div className="flex min-h-screen flex-col bg-black text-white">
       <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/70 backdrop-blur-lg">
@@ -36,16 +48,29 @@ export default async function PainelPage() {
             </span>
           </Link>
 
-          <form action="/auth/signout" method="post">
-            <Button
-              type="submit"
-              variant="outline"
-              size="sm"
-              className="border-white/30 bg-white/5 text-white hover:bg-white/15 hover:text-white"
-            >
-              Sair
-            </Button>
-          </form>
+          <div className="flex items-center gap-3">
+            {isAdmin && (
+              <Link href="/admin/overview">
+                <Button
+                  type="button"
+                  size="sm"
+                  className="bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-500 hover:to-blue-500"
+                >
+                  Painel Admin
+                </Button>
+              </Link>
+            )}
+            <form action="/auth/signout" method="post">
+              <Button
+                type="submit"
+                variant="outline"
+                size="sm"
+                className="border-white/30 bg-white/5 text-white hover:bg-white/15 hover:text-white"
+              >
+                Sair
+              </Button>
+            </form>
+          </div>
         </div>
       </header>
 
