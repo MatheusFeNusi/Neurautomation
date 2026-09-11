@@ -47,7 +47,6 @@ export function LoginForm() {
     }
 
     router.replace(next);
-    router.refresh();
   };
 
   const handlePasswordReset = async () => {

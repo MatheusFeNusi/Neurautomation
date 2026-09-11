@@ -1,3 +1,4 @@
+import { cache } from 'react';
 import { createClient } from '@/lib/supabase/server';
 import { isSupabaseConfigured } from '@/lib/supabase/config';
 import { Store, Offer, Campaign, AdSpend, Sale } from '@/types/affiliate';
@@ -352,7 +353,7 @@ let MOCK_SALES: Sale[] = [
 // FUNÇÕES DO SERVICE (CONSULTA HÍBRIDA: SUPABASE COM FALLBACK TRANSPARENTE)
 // -----------------------------------------------------------------------------
 
-export async function getStores(): Promise<Store[]> {
+export const getStores = cache(async (): Promise<Store[]> => {
   if (isSupabaseConfigured) {
     try {
       const supabase = await createClient();
@@ -369,12 +370,14 @@ export async function getStores(): Promise<Store[]> {
     }
   }
   return MOCK_STORES;
-}
+});
 
-export async function getStoreBySlug(slug: string): Promise<Store | null> {
-  const stores = await getStores();
-  return stores.find((s) => s.slug === slug || s.id === slug) || null;
-}
+export const getStoreBySlug = cache(
+  async (slug: string): Promise<Store | null> => {
+    const stores = await getStores();
+    return stores.find((s) => s.slug === slug || s.id === slug) || null;
+  },
+);
 
 export async function createStore(storeData: Omit<Store, 'id' | 'created_at' | 'updated_at'>): Promise<Store> {
   const newStore: Store = {
@@ -402,20 +405,22 @@ export async function createStore(storeData: Omit<Store, 'id' | 'created_at' | '
   return newStore;
 }
 
-export async function getOffers(storeId?: string): Promise<Offer[]> {
-  if (isSupabaseConfigured) {
-    try {
-      const supabase = await createClient();
-      let query = supabase.from('offers').select('*, store:stores(*)');
-      if (storeId) query = query.eq('store_id', storeId);
-      const { data, error } = await query;
-      if (!error && data && data.length > 0) return data as Offer[];
-    } catch {
-      // Fallback
+export const getOffers = cache(
+  async (storeId?: string): Promise<Offer[]> => {
+    if (isSupabaseConfigured) {
+      try {
+        const supabase = await createClient();
+        let query = supabase.from('offers').select('*, store:stores(*)');
+        if (storeId) query = query.eq('store_id', storeId);
+        const { data, error } = await query;
+        if (!error && data && data.length > 0) return data as Offer[];
+      } catch {
+        // Fallback
+      }
     }
-  }
-  return storeId ? MOCK_OFFERS.filter((o) => o.store_id === storeId) : MOCK_OFFERS;
-}
+    return storeId ? MOCK_OFFERS.filter((o) => o.store_id === storeId) : MOCK_OFFERS;
+  },
+);
 
 export async function createOffer(offerData: Omit<Offer, 'id' | 'created_at' | 'updated_at'>): Promise<Offer> {
   const newOffer: Offer = {
@@ -437,18 +442,20 @@ export async function createOffer(offerData: Omit<Offer, 'id' | 'created_at' | '
   return newOffer;
 }
 
-export async function getCampaigns(storeId?: string): Promise<Campaign[]> {
-  if (isSupabaseConfigured) {
-    try {
-      const supabase = await createClient();
-      let query = supabase.from('campaigns').select('*, store:stores(*), offer:offers(*)');
-      if (storeId) query = query.eq('store_id', storeId);
-      const { data, error } = await query;
-      if (!error && data && data.length > 0) return data as Campaign[];
-    } catch {}
-  }
-  return storeId ? MOCK_CAMPAIGNS.filter((c) => c.store_id === storeId) : MOCK_CAMPAIGNS;
-}
+export const getCampaigns = cache(
+  async (storeId?: string): Promise<Campaign[]> => {
+    if (isSupabaseConfigured) {
+      try {
+        const supabase = await createClient();
+        let query = supabase.from('campaigns').select('*, store:stores(*), offer:offers(*)');
+        if (storeId) query = query.eq('store_id', storeId);
+        const { data, error } = await query;
+        if (!error && data && data.length > 0) return data as Campaign[];
+      } catch {}
+    }
+    return storeId ? MOCK_CAMPAIGNS.filter((c) => c.store_id === storeId) : MOCK_CAMPAIGNS;
+  },
+);
 
 export async function createCampaign(campaignData: Omit<Campaign, 'id' | 'created_at' | 'updated_at'>): Promise<Campaign> {
   const newCampaign: Campaign = {
@@ -470,18 +477,20 @@ export async function createCampaign(campaignData: Omit<Campaign, 'id' | 'create
   return newCampaign;
 }
 
-export async function getAdSpends(storeId?: string): Promise<AdSpend[]> {
-  if (isSupabaseConfigured) {
-    try {
-      const supabase = await createClient();
-      let query = supabase.from('ad_spend').select('*, campaign:campaigns(*), store:stores(*)');
-      if (storeId) query = query.eq('store_id', storeId);
-      const { data, error } = await query;
-      if (!error && data && data.length > 0) return data as AdSpend[];
-    } catch {}
-  }
-  return storeId ? MOCK_AD_SPEND.filter((a) => a.store_id === storeId) : MOCK_AD_SPEND;
-}
+export const getAdSpends = cache(
+  async (storeId?: string): Promise<AdSpend[]> => {
+    if (isSupabaseConfigured) {
+      try {
+        const supabase = await createClient();
+        let query = supabase.from('ad_spend').select('*, campaign:campaigns(*), store:stores(*)');
+        if (storeId) query = query.eq('store_id', storeId);
+        const { data, error } = await query;
+        if (!error && data && data.length > 0) return data as AdSpend[];
+      } catch {}
+    }
+    return storeId ? MOCK_AD_SPEND.filter((a) => a.store_id === storeId) : MOCK_AD_SPEND;
+  },
+);
 
 export async function createAdSpend(adSpendData: Omit<AdSpend, 'id' | 'created_at' | 'updated_at'>): Promise<AdSpend> {
   const newAdSpend: AdSpend = {
@@ -503,18 +512,20 @@ export async function createAdSpend(adSpendData: Omit<AdSpend, 'id' | 'created_a
   return newAdSpend;
 }
 
-export async function getSales(storeId?: string): Promise<Sale[]> {
-  if (isSupabaseConfigured) {
-    try {
-      const supabase = await createClient();
-      let query = supabase.from('sales').select('*, store:stores(*), offer:offers(*), campaign:campaigns(*)');
-      if (storeId) query = query.eq('store_id', storeId);
-      const { data, error } = await query;
-      if (!error && data && data.length > 0) return data as Sale[];
-    } catch {}
-  }
-  return storeId ? MOCK_SALES.filter((s) => s.store_id === storeId) : MOCK_SALES;
-}
+export const getSales = cache(
+  async (storeId?: string): Promise<Sale[]> => {
+    if (isSupabaseConfigured) {
+      try {
+        const supabase = await createClient();
+        let query = supabase.from('sales').select('*, store:stores(*), offer:offers(*), campaign:campaigns(*)');
+        if (storeId) query = query.eq('store_id', storeId);
+        const { data, error } = await query;
+        if (!error && data && data.length > 0) return data as Sale[];
+      } catch {}
+    }
+    return storeId ? MOCK_SALES.filter((s) => s.store_id === storeId) : MOCK_SALES;
+  },
+);
 
 export async function createSale(saleData: Omit<Sale, 'id' | 'created_at' | 'updated_at'>): Promise<Sale> {
   // Regra crítica do produto: Se não tiver click_id, tracking_status NÃO PODE ser 'attributed'

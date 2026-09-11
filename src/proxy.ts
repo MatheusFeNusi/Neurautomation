@@ -31,9 +31,13 @@ export async function proxy(request: NextRequest) {
     },
   });
 
+  // getSession() lê a sessão dos cookies localmente (sem rede).
+  // A validação real (getUser) é feita nos layouts/páginas e rotas de API.
+  // Isso evita uma chamada de rede ao Supabase em CADA navegação.
   const {
-    data: { user },
-  } = await supabase.auth.getUser();
+    data: { session },
+  } = await supabase.auth.getSession();
+  const user = session?.user ?? null;
 
   const { pathname } = request.nextUrl;
   const isProtected = PROTECTED_PREFIXES.some(
