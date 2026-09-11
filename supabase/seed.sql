@@ -34,3 +34,118 @@ VALUES
 ('c2222222-2222-2222-2222-222222222222', 'a2222222-2222-2222-2222-222222222222', 'b2222222-2222-2222-2222-222222222222', 'GS_BR_Kabum_Hardware_Gamer', 'google_ads', '1982738492', 'RTX Serie 40', 'placa de video rtx 4070 menor preco', 'active'),
 ('c3333333-3333-3333-3333-333333333333', 'a3333333-3333-3333-3333-333333333333', 'b3333333-3333-3333-3333-333333333333', 'GS_BR_Sephora_Perfumes_Luxo', 'google_ads', '1982738493', 'Dior Masculino', 'perfume sauvage dior original preco', 'testing')
 ON CONFLICT (id) DO NOTHING;
+
+-- ==============================================================================
+-- 4. AD SPEND DEMO (7 dias)
+-- ==============================================================================
+INSERT INTO public.ad_spend (campaign_id, store_id, date, clicks, impressions, cost, conversions, conversion_value, source)
+SELECT
+  (SELECT id FROM public.campaigns WHERE name LIKE '%Nike_Pegasus%' LIMIT 1),
+  (SELECT id FROM public.stores WHERE slug = 'nike-brasil' LIMIT 1),
+  d::date,
+  floor(random() * 150 + 50)::int,
+  floor(random() * 8000 + 3000)::int,
+  round((random() * 120 + 40)::numeric, 2),
+  round((random() * 6 + 1)::numeric, 2),
+  round((random() * 1200 + 400)::numeric, 2),
+  'manual'
+FROM generate_series(current_date - interval '6 days', current_date, interval '1 day') AS d
+WHERE NOT EXISTS (
+  SELECT 1 FROM public.ad_spend
+  WHERE campaign_id = (SELECT id FROM public.campaigns WHERE name LIKE '%Nike_Pegasus%' LIMIT 1)
+    AND date = d::date
+);
+
+INSERT INTO public.ad_spend (campaign_id, store_id, date, clicks, impressions, cost, conversions, conversion_value, source)
+SELECT
+  (SELECT id FROM public.campaigns WHERE name LIKE '%Kabum_Hardware%' LIMIT 1),
+  (SELECT id FROM public.stores WHERE slug = 'kabum' LIMIT 1),
+  d::date,
+  floor(random() * 200 + 80)::int,
+  floor(random() * 12000 + 5000)::int,
+  round((random() * 180 + 70)::numeric, 2),
+  round((random() * 9 + 2)::numeric, 2),
+  round((random() * 2000 + 700)::numeric, 2),
+  'manual'
+FROM generate_series(current_date - interval '6 days', current_date, interval '1 day') AS d
+WHERE NOT EXISTS (
+  SELECT 1 FROM public.ad_spend
+  WHERE campaign_id = (SELECT id FROM public.campaigns WHERE name LIKE '%Kabum_Hardware%' LIMIT 1)
+    AND date = d::date
+);
+
+-- ==============================================================================
+-- 5. VENDAS DEMO (7 dias) — CORRIGIDO: click_id SEMPRE preenchido
+--   (tracking_status='attributed' EXIGE click_id NOT NULL)
+-- ==============================================================================
+INSERT INTO public.sales (store_id, offer_id, campaign_id, affiliate_network, order_id, date, sale_value, commission, status, origin, click_id, tracking_status, notes, source)
+SELECT
+  (SELECT id FROM public.stores WHERE slug = 'nike-brasil' LIMIT 1),
+  (SELECT id FROM public.offers WHERE name = 'Tênis Air Zoom Pegasus' LIMIT 1),
+  (SELECT id FROM public.campaigns WHERE name LIKE '%Nike_Pegasus%' LIMIT 1),
+  'Awin',
+  'NIKE-' || to_char(d::date, 'YYYYMMDD') || '-' || floor(random()*9999)::int,
+  d::date,
+  round((random() * 900 + 400)::numeric, 2),
+  round((random() * 100 + 30)::numeric, 2),
+  (CASE WHEN random() < 0.7 THEN 'approved' ELSE 'pending' END)::text,
+  'google_ads',
+  md5(random()::text || clock_timestamp()::text),
+  'attributed',
+  'Venda conciliada — Awin',
+  'manual'
+FROM generate_series(current_date - interval '6 days', current_date, interval '1 day') AS d,
+     generate_series(1, 3 + floor(random()*3)::int)
+WHERE NOT EXISTS (
+  SELECT 1 FROM public.sales
+  WHERE store_id = (SELECT id FROM public.stores WHERE slug = 'nike-brasil' LIMIT 1)
+    AND date = d::date
+);
+
+INSERT INTO public.sales (store_id, offer_id, campaign_id, affiliate_network, order_id, date, sale_value, commission, status, origin, click_id, tracking_status, notes, source)
+SELECT
+  (SELECT id FROM public.stores WHERE slug = 'kabum' LIMIT 1),
+  (SELECT id FROM public.offers WHERE name = 'Placa de Vídeo RTX 4070' LIMIT 1),
+  (SELECT id FROM public.campaigns WHERE name LIKE '%Kabum_Hardware%' LIMIT 1),
+  'Lomadee',
+  'KBUM-' || to_char(d::date, 'YYYYMMDD') || '-' || floor(random()*9999)::int,
+  d::date,
+  round((random() * 3000 + 2000)::numeric, 2),
+  round((random() * 180 + 60)::numeric, 2),
+  (CASE WHEN random() < 0.6 THEN 'approved' ELSE 'pending' END)::text,
+  'google_ads',
+  md5(random()::text || clock_timestamp()::text),
+  'attributed',
+  'Comissão Lomadee — 48h',
+  'manual'
+FROM generate_series(current_date - interval '6 days', current_date, interval '1 day') AS d,
+     generate_series(1, 2 + floor(random()*4)::int)
+WHERE NOT EXISTS (
+  SELECT 1 FROM public.sales
+  WHERE store_id = (SELECT id FROM public.stores WHERE slug = 'kabum' LIMIT 1)
+    AND date = d::date
+);
+
+INSERT INTO public.sales (store_id, offer_id, campaign_id, affiliate_network, order_id, date, sale_value, commission, status, origin, click_id, tracking_status, notes, source)
+SELECT
+  (SELECT id FROM public.stores WHERE slug = 'sephora-brasil' LIMIT 1),
+  (SELECT id FROM public.offers WHERE name = 'Perfume Sauvage Dior' LIMIT 1),
+  (SELECT id FROM public.campaigns WHERE name LIKE '%Sephora_Perfumes%' LIMIT 1),
+  'Rakuten',
+  'SPH-' || to_char(d::date, 'YYYYMMDD') || '-' || floor(random()*9999)::int,
+  d::date,
+  round((random() * 800 + 450)::numeric, 2),
+  round((random() * 120 + 40)::numeric, 2),
+  (CASE WHEN random() < 0.5 THEN 'approved' ELSE 'pending' END)::text,
+  'google_ads',
+  md5(random()::text || clock_timestamp()::text),
+  'attributed',
+  'Rakuten — período testing',
+  'manual'
+FROM generate_series(current_date - interval '6 days', current_date, interval '1 day') AS d,
+     generate_series(1, 2 + floor(random()*2)::int)
+WHERE NOT EXISTS (
+  SELECT 1 FROM public.sales
+  WHERE store_id = (SELECT id FROM public.stores WHERE slug = 'sephora-brasil' LIMIT 1)
+    AND date = d::date
+);
