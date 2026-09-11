@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Plus, Loader2, AlertCircle, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ModalPortal } from "./modal-portal";
 import { Store, Offer, Campaign, SaleOrigin, SaleStatus } from "@/types/affiliate";
 
 interface AddSaleModalProps {
@@ -110,7 +111,7 @@ export function AddSaleModal({ stores, offers = [], campaigns = [], onSaleCreate
       </Button>
 
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in">
+        <ModalPortal>
           <div className="bg-[#121216] border border-white/10 rounded-xl w-full max-w-xl max-h-[90vh] overflow-y-auto p-6 shadow-2xl">
             <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-5">
               <div className="flex items-center gap-2.5">
@@ -379,7 +380,7 @@ export function AddSaleModal({ stores, offers = [], campaigns = [], onSaleCreate
               </div>
             </form>
           </div>
-        </div>
+        </ModalPortal>
       )}
     </>
   );

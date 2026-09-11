@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { DollarSign, Loader2, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ModalPortal } from "./modal-portal";
 import { Store, Campaign } from "@/types/affiliate";
 
 interface AddSpendModalProps {
@@ -90,7 +91,7 @@ export function AddSpendModal({ stores, campaigns, onSpendCreated }: AddSpendMod
       </Button>
 
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in">
+        <ModalPortal>
           <div className="bg-[#121216] border border-white/10 rounded-xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-6 shadow-2xl">
             <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-5">
               <div className="flex items-center gap-2.5">
@@ -261,7 +262,7 @@ export function AddSpendModal({ stores, campaigns, onSpendCreated }: AddSpendMod
               </div>
             </form>
           </div>
-        </div>
+        </ModalPortal>
       )}
     </>
   );
