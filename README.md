@@ -17,7 +17,8 @@ Os componentes shadcn ficam em `src/components/ui` porque é o caminho definido 
 | --- | --- |
 | `/` | Home: header, hero, órbita das 4 frentes, footer |
 | `/login` | Login por e-mail + senha, com "esqueci minha senha" |
-| `/painel` | Área restrita (placeholder), protegida por `src/proxy.ts` |
+| `/painel` | Área do cliente (placeholder), protegida por `src/proxy.ts` |
+| `/admin` | Hub administrativo de afiliados (redireciona para `/admin/overview`) |
 | `/auth/callback` | Troca do `code` do link de e-mail por sessão |
 | `/auth/signout` | Encerra a sessão |
 
@@ -36,7 +37,23 @@ NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 ```
 
-Sem essas variáveis a home funciona normalmente; o login exibe um aviso de configuração e `/painel` redireciona para `/login`.
+Sem essas variáveis a home funciona normalmente; o login avisa a falta de configuração, `/painel` redireciona para `/login` e `/admin` abre em modo de demonstração com dados simulados.
+
+### Banco do admin (afiliados)
+
+No SQL Editor do Supabase, execute nesta ordem:
+
+1. `supabase/migrations/20260910000000_admin_affiliate_schema.sql`
+2. `supabase/seed.sql` (opcional, dados de exemplo)
+3. Papel de administrador para o usuário já criado em Authentication → Users:
+
+```sql
+INSERT INTO public.user_roles (user_id, role)
+SELECT id, 'admin' FROM auth.users WHERE email = 'SEU_EMAIL_AQUI'
+ON CONFLICT (user_id, role) DO NOTHING;
+```
+
+Sem a linha em `user_roles`, um usuário autenticado cai em `/painel` e não entra no `/admin`.
 
 No painel do Supabase, adicione as URLs de redirecionamento usadas pelo fluxo de recuperação de senha (Authentication → URL Configuration → Redirect URLs):
 
