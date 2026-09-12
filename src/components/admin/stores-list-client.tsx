@@ -15,6 +15,7 @@ import {
 import { Store, AdSpend, Sale, StoreStatus } from "@/types/affiliate";
 import { calculateMetrics, evaluateStoreAlerts, formatCurrency, formatPercent } from "@/lib/metrics";
 import { AddStoreModal } from "./add-store-modal";
+import { DeleteRowButton } from "./delete-row-button";
 
 interface StoresListClientProps {
   initialStores: Store[];
@@ -266,14 +267,21 @@ export function StoresListClient({ initialStores, adSpends, sales }: StoresListC
                       </td>
 
                       {/* Ações */}
-                      <td className="py-3.5 px-4 text-center">
-                        <Link
-                          href={`/admin/stores/${store.slug || store.id}`}
-                          className="inline-flex items-center gap-1 text-[11px] text-blue-400 hover:text-blue-300 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/20 px-2.5 py-1 rounded transition-colors"
-                        >
-                          <span>Detalhes</span>
-                          <ExternalLink className="w-3 h-3" />
-                        </Link>
+                      <td className="py-3.5 px-4">
+                        <div className="flex items-center justify-center gap-1.5">
+                          <Link
+                            href={`/admin/stores/${store.slug || store.id}`}
+                            className="inline-flex items-center gap-1 text-[11px] text-blue-400 hover:text-blue-300 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/20 px-2.5 py-1 rounded transition-colors"
+                          >
+                            <span>Detalhes</span>
+                            <ExternalLink className="w-3 h-3" />
+                          </Link>
+                          <DeleteRowButton
+                            endpoint={`/api/admin/stores/${store.id}`}
+                            label="Excluir"
+                            onDeleted={() => window.location.reload()}
+                          />
+                        </div>
                       </td>
                     </tr>
                   );

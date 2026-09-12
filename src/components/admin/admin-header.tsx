@@ -4,7 +4,8 @@ import { Store, Offer, Campaign } from "@/types/affiliate";
 import { AddSaleModal } from "./add-sale-modal";
 import { AddStoreModal } from "./add-store-modal";
 import { AddSpendModal } from "./add-spend-modal";
-import { Search } from "lucide-react";
+import { Search, Globe } from "lucide-react";
+import Link from "next/link";
 
 interface AdminHeaderProps {
   stores: Store[];
@@ -15,6 +16,15 @@ interface AdminHeaderProps {
 export function AdminHeader({ stores, offers, campaigns }: AdminHeaderProps) {
   return (
     <header className="h-16 border-b border-white/10 bg-[#0e0e11]/80 backdrop-blur-md px-6 flex items-center justify-between sticky top-0 z-30">
+      {/* Link para a página inicial do site */}
+      <Link
+        href="/"
+        className="inline-flex items-center gap-1.5 text-[11px] text-emerald-400/80 hover:text-emerald-300 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/20 px-2.5 py-1.5 rounded-lg transition-colors shrink-0"
+      >
+        <Globe className="w-3.5 h-3.5" />
+        <span className="hidden sm:inline">Ver Site</span>
+      </Link>
+
       {/* Quick Search */}
       <div className="flex items-center gap-3 w-80">
         <div className="relative w-full">

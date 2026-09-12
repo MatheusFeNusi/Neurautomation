@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Megaphone, Plus, Search, Loader2, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { DeleteRowButton } from "./delete-row-button";
 import { Campaign, Store, Offer, AdSpend, Sale, CampaignStatus } from "@/types/affiliate";
 import { calculateMetrics, formatCurrency, formatPercent } from "@/lib/metrics";
 
@@ -155,12 +156,13 @@ export function CampaignsListClient({
                 <th className="py-3 px-3 text-right">Comissão</th>
                 <th className="py-3 px-3 text-right">Lucro</th>
                 <th className="py-3 px-3 text-right">ROI</th>
+                <th className="py-3 px-4 text-center">Ações</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5">
               {filteredCampaigns.length === 0 ? (
                 <tr>
-                  <td colSpan={9} className="py-12 text-center text-white/40">
+                  <td colSpan={10} className="py-12 text-center text-white/40">
                     <Megaphone className="w-8 h-8 mx-auto mb-2 text-white/20" />
                     Nenhuma campanha encontrada.
                   </td>
@@ -220,6 +222,12 @@ export function CampaignsListClient({
                         <span className={m.roi >= 0 ? "text-emerald-400" : "text-red-400"}>
                           {formatPercent(m.roi)}
                         </span>
+                      </td>
+                      <td className="py-3.5 px-4 text-center">
+                        <DeleteRowButton
+                          endpoint={`/api/admin/campaigns/${camp.id}`}
+                          onDeleted={() => window.location.reload()}
+                        />
                       </td>
                     </tr>
                   );

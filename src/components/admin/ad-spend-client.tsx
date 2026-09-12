@@ -5,6 +5,7 @@ import { DollarSign, Search, Plus, Calendar, Layers, Download } from "lucide-rea
 import { AdSpend, Store, Campaign } from "@/types/affiliate";
 import { formatCurrency, formatPercent } from "@/lib/metrics";
 import { AddSpendModal } from "./add-spend-modal";
+import { DeleteRowButton } from "./delete-row-button";
 import { exportAdSpendCsv } from "@/lib/export-csv";
 
 interface AdSpendClientProps {
@@ -137,12 +138,13 @@ export function AdSpendClient({ initialAdSpends, stores, campaigns }: AdSpendCli
                 <th className="py-3 px-3 text-right">CTR</th>
                 <th className="py-3 px-3 text-right">Investimento (Custo)</th>
                 <th className="py-3 px-3">Fonte / Deduplicação</th>
+                <th className="py-3 px-3">Ações</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5">
               {filteredSpends.length === 0 ? (
                 <tr>
-                  <td colSpan={9} className="py-12 text-center text-white/40">
+                  <td colSpan={10} className="py-12 text-center text-white/40">
                     <DollarSign className="w-8 h-8 mx-auto mb-2 text-white/20" />
                     Nenhum lançamento de gasto encontrado.
                   </td>
@@ -172,6 +174,12 @@ export function AdSpendClient({ initialAdSpends, stores, campaigns }: AdSpendCli
                         <span className="bg-white/5 border border-white/10 px-2 py-0.5 rounded text-[10px] text-white/70 capitalize font-mono">
                           {spend.source}
                         </span>
+                      </td>
+                      <td className="py-3.5 px-3">
+                        <DeleteRowButton
+                          endpoint={`/api/admin/ad-spend/${spend.id}`}
+                          onDeleted={() => window.location.reload()}
+                        />
                       </td>
                     </tr>
                   );

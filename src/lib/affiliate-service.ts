@@ -361,10 +361,9 @@ export const getStores = cache(async (): Promise<Store[]> => {
         .from('stores')
         .select('*')
         .order('name', { ascending: true });
-
-      if (!error && data && data.length > 0) {
-        return data as Store[];
-      }
+      // IMPORTANTE: retorna dados reais mesmo que a tabela esteja vazia
+      // (length 0). Só cai pro mock se a query realmente falhar.
+      if (!error && data) return data as Store[];
     } catch {
       // Fallback
     }
@@ -378,6 +377,61 @@ export const getStoreBySlug = cache(
     return stores.find((s) => s.slug === slug || s.id === slug) || null;
   },
 );
+
+export async function deleteStore(id: string): Promise<void> {
+  if (isSupabaseConfigured) {
+    try {
+      const supabase = await createClient();
+      const { error } = await supabase.from('stores').delete().eq('id', id);
+      if (!error) return;
+    } catch {}
+  }
+  MOCK_STORES = MOCK_STORES.filter((s) => s.id !== id);
+}
+
+export async function deleteOffer(id: string): Promise<void> {
+  if (isSupabaseConfigured) {
+    try {
+      const supabase = await createClient();
+      const { error } = await supabase.from('offers').delete().eq('id', id);
+      if (!error) return;
+    } catch {}
+  }
+  MOCK_OFFERS = MOCK_OFFERS.filter((o) => o.id !== id);
+}
+
+export async function deleteCampaign(id: string): Promise<void> {
+  if (isSupabaseConfigured) {
+    try {
+      const supabase = await createClient();
+      const { error } = await supabase.from('campaigns').delete().eq('id', id);
+      if (!error) return;
+    } catch {}
+  }
+  MOCK_CAMPAIGNS = MOCK_CAMPAIGNS.filter((c) => c.id !== id);
+}
+
+export async function deleteAdSpend(id: string): Promise<void> {
+  if (isSupabaseConfigured) {
+    try {
+      const supabase = await createClient();
+      const { error } = await supabase.from('ad_spend').delete().eq('id', id);
+      if (!error) return;
+    } catch {}
+  }
+  MOCK_AD_SPEND = MOCK_AD_SPEND.filter((a) => a.id !== id);
+}
+
+export async function deleteSale(id: string): Promise<void> {
+  if (isSupabaseConfigured) {
+    try {
+      const supabase = await createClient();
+      const { error } = await supabase.from('sales').delete().eq('id', id);
+      if (!error) return;
+    } catch {}
+  }
+  MOCK_SALES = MOCK_SALES.filter((s) => s.id !== id);
+}
 
 export async function createStore(storeData: Omit<Store, 'id' | 'created_at' | 'updated_at'>): Promise<Store> {
   const newStore: Store = {
@@ -413,7 +467,7 @@ export const getOffers = cache(
         let query = supabase.from('offers').select('*, store:stores(*)');
         if (storeId) query = query.eq('store_id', storeId);
         const { data, error } = await query;
-        if (!error && data && data.length > 0) return data as Offer[];
+        if (!error && data) return data as Offer[];
       } catch {
         // Fallback
       }
@@ -450,7 +504,7 @@ export const getCampaigns = cache(
         let query = supabase.from('campaigns').select('*, store:stores(*), offer:offers(*)');
         if (storeId) query = query.eq('store_id', storeId);
         const { data, error } = await query;
-        if (!error && data && data.length > 0) return data as Campaign[];
+        if (!error && data) return data as Campaign[];
       } catch {}
     }
     return storeId ? MOCK_CAMPAIGNS.filter((c) => c.store_id === storeId) : MOCK_CAMPAIGNS;
@@ -485,7 +539,7 @@ export const getAdSpends = cache(
         let query = supabase.from('ad_spend').select('*, campaign:campaigns(*), store:stores(*)');
         if (storeId) query = query.eq('store_id', storeId);
         const { data, error } = await query;
-        if (!error && data && data.length > 0) return data as AdSpend[];
+        if (!error && data) return data as AdSpend[];
       } catch {}
     }
     return storeId ? MOCK_AD_SPEND.filter((a) => a.store_id === storeId) : MOCK_AD_SPEND;
@@ -520,7 +574,7 @@ export const getSales = cache(
         let query = supabase.from('sales').select('*, store:stores(*), offer:offers(*), campaign:campaigns(*)');
         if (storeId) query = query.eq('store_id', storeId);
         const { data, error } = await query;
-        if (!error && data && data.length > 0) return data as Sale[];
+        if (!error && data) return data as Sale[];
       } catch {}
     }
     return storeId ? MOCK_SALES.filter((s) => s.store_id === storeId) : MOCK_SALES;

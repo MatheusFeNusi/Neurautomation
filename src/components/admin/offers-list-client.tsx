@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Tag, Plus, ExternalLink, Loader2, AlertCircle } from "lucide-react";
+import { DeleteRowButton } from "./delete-row-button";
 import { Button } from "@/components/ui/button";
 import { Offer, Store, OfferStatus } from "@/types/affiliate";
 import { formatCurrency } from "@/lib/metrics";
@@ -27,6 +28,8 @@ export function OffersListClient({ initialOffers, stores }: OffersListClientProp
   const [payoutType, setPayoutType] = useState<"percentage" | "fixed">("percentage");
   const [payoutValue, setPayoutValue] = useState("");
   const [status, setStatus] = useState<OfferStatus>("active");
+
+  const handleDeleted = () => window.location.reload();
 
   const filteredOffers = offers.filter(
     (o) => selectedStore === "all" || o.store_id === selectedStore
@@ -174,6 +177,10 @@ export function OffersListClient({ initialOffers, stores }: OffersListClientProp
                           <ExternalLink className="w-3 h-3" />
                         </a>
                       )}
+                      <DeleteRowButton
+                        endpoint={`/api/admin/offers/${offer.id}`}
+                        onDeleted={() => window.location.reload()}
+                      />
                     </td>
                   </tr>
                 );

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ShoppingCart, Search, Filter, ShieldCheck, ShieldAlert, CheckCircle2, Clock, XCircle, RefreshCcw, Download } from "lucide-react";
 import { Sale, Store, Offer, Campaign, SaleStatus, SaleOrigin, TrackingStatus } from "@/types/affiliate";
 import { formatCurrency } from "@/lib/metrics";
+import { DeleteRowButton } from "./delete-row-button";
 import { AddSaleModal } from "./add-sale-modal";
 import { exportSalesCsv } from "@/lib/export-csv";
 
@@ -180,12 +181,13 @@ export function SalesListClient({ initialSales, stores, offers, campaigns }: Sal
                 <th className="py-3 px-3">Rastreamento</th>
                 <th className="py-3 px-3">Status</th>
                 <th className="py-3 px-4">Click ID / Notas</th>
+                <th className="py-3 px-3 text-center">Ações</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5">
               {filteredSales.length === 0 ? (
                 <tr>
-                  <td colSpan={9} className="py-12 text-center text-white/40">
+                  <td colSpan={10} className="py-12 text-center text-white/40">
                     <ShoppingCart className="w-8 h-8 mx-auto mb-2 text-white/20" />
                     Nenhuma venda encontrada com os filtros atuais.
                   </td>
@@ -256,6 +258,12 @@ export function SalesListClient({ initialSales, stores, offers, campaigns }: Sal
                         ) : (
                           <span className="text-white/20 text-[10px]">—</span>
                         )}
+                      </td>
+                      <td className="py-3.5 px-3 text-center">
+                        <DeleteRowButton
+                          endpoint={`/api/admin/sales/${sale.id}`}
+                          onDeleted={() => window.location.reload()}
+                        />
                       </td>
                     </tr>
                   );
