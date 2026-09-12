@@ -154,6 +154,7 @@ CREATE TABLE IF NOT EXISTS public.sales (
 );
 
 -- Regra inquebrável: uma venda só pode ser 'attributed' se houver click_id associado
+ALTER TABLE public.sales DROP CONSTRAINT IF EXISTS chk_attribution_requires_click;
 ALTER TABLE public.sales ADD CONSTRAINT chk_attribution_requires_click 
 CHECK (tracking_status <> 'attributed' OR click_id IS NOT NULL);
 
