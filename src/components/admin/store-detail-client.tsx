@@ -29,6 +29,7 @@ import {
 } from "recharts";
 import { Store, Offer, Campaign, AdSpend, Sale } from "@/types/affiliate";
 import { calculateMetrics, evaluateStoreAlerts, formatCurrency, formatPercent } from "@/lib/metrics";
+import { EditStoreModal } from "./edit-store-modal";
 
 interface StoreDetailClientProps {
   store: Store;
@@ -133,15 +134,23 @@ export function StoreDetailClient({
             >
               {store.status.toUpperCase()}
             </span>
+            <EditStoreModal store={store} />
           </div>
 
-          <div className="text-xs text-white/50 mt-1 flex items-center gap-3">
+          <div className="text-xs text-white/50 mt-1 flex items-center gap-3 flex-wrap">
+            <span>País: <strong className="text-white">{store.country || "—"}</strong></span>
             <span>Rede: <strong className="text-white">{store.affiliate_network}</strong></span>
             {store.affiliate_program && (
               <span>Programa: <strong className="text-white">{store.affiliate_program}</strong></span>
             )}
             <span>Categoria: <strong className="text-white">{store.category || "Geral"}</strong></span>
           </div>
+
+          {store.description && (
+            <div className="text-xs text-white/70 mt-3 max-w-3xl leading-relaxed">
+              {store.description}
+            </div>
+          )}
         </div>
       </div>
 

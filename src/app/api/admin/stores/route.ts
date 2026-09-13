@@ -35,6 +35,8 @@ export async function POST(req: Request) {
     const newStore = await createStore({
       name: body.name,
       slug,
+      description: body.description || '',
+      country: body.country || '',
       category: body.category || 'Geral',
       affiliate_network: body.affiliate_network,
       affiliate_program: body.affiliate_program || '',

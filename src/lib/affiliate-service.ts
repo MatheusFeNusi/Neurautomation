@@ -9,6 +9,8 @@ let MOCK_STORES: Store[] = [
     id: 'a1111111-1111-1111-1111-111111111111',
     name: 'Nike Brasil',
     slug: 'nike-brasil',
+    description: 'E-commerce oficial da Nike no Brasil com foco em tênis de corrida e moda esportiva.',
+    country: 'Brasil',
     category: 'Moda & Esportes',
     affiliate_network: 'Awin',
     affiliate_program: 'Nike Oficial BR',
@@ -29,6 +31,8 @@ let MOCK_STORES: Store[] = [
     id: 'a2222222-2222-2222-2222-222222222222',
     name: 'Kabum Hardware',
     slug: 'kabum-hardware',
+    description: 'Maior e-commerce de tecnologia e games da América Latina.',
+    country: 'Brasil',
     category: 'Informática & Gamer',
     affiliate_network: 'Lomadee',
     affiliate_program: 'Kabum Hardware Top',
@@ -49,6 +53,8 @@ let MOCK_STORES: Store[] = [
     id: 'a3333333-3333-3333-3333-333333333333',
     name: 'Sephora Brasil',
     slug: 'sephora-brasil',
+    description: 'Varejista de beleza e perfumaria com marcas importadas de luxo.',
+    country: 'Brasil',
     category: 'Beleza & Perfumaria',
     affiliate_network: 'Rakuten',
     affiliate_program: 'Sephora Beauty Club',
@@ -69,6 +75,8 @@ let MOCK_STORES: Store[] = [
     id: 'a4444444-4444-4444-4444-444444444444',
     name: 'Dell Computadores',
     slug: 'dell-computadores',
+    description: 'Fabricante global de computadores, notebooks e workstations.',
+    country: 'Brasil',
     category: 'Tecnologia',
     affiliate_network: 'CJ Affiliate',
     affiliate_program: 'Dell Inspiron/Alienware',
@@ -89,6 +97,8 @@ let MOCK_STORES: Store[] = [
     id: 'a5555555-5555-5555-5555-555555555555',
     name: 'Amazon Brasil',
     slug: 'amazon-brasil',
+    description: 'Gigante do varejo online com catálogo gigante em eletrônicos, livros e casa.',
+    country: 'Brasil',
     category: 'Eletrônicos & Casa',
     affiliate_network: 'Amazon Associates',
     affiliate_program: 'Associados BR',
@@ -377,6 +387,33 @@ export const getStoreBySlug = cache(
     return stores.find((s) => s.slug === slug || s.id === slug) || null;
   },
 );
+
+export async function updateStore(
+  id: string,
+  updates: Partial<Omit<Store, 'id' | 'created_at' | 'updated_at'>>,
+): Promise<Store> {
+  if (isSupabaseConfigured) {
+    try {
+      const supabase = await createClient();
+      const { data, error } = await supabase
+        .from('stores')
+        .update(updates)
+        .eq('id', id)
+        .select('*')
+        .single();
+      if (!error && data) return data as Store;
+    } catch {}
+  }
+  const index = MOCK_STORES.findIndex((s) => s.id === id);
+  if (index === -1) throw new Error('Loja não encontrada.');
+  const updated: Store = {
+    ...MOCK_STORES[index],
+    ...updates,
+    updated_at: new Date().toISOString(),
+  };
+  MOCK_STORES[index] = updated;
+  return updated;
+}
 
 export async function deleteStore(id: string): Promise<void> {
   if (isSupabaseConfigured) {

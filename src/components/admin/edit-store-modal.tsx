@@ -1,38 +1,38 @@
 "use client";
 
 import { useState } from "react";
-import { Store as StoreIcon, Loader2, AlertCircle } from "lucide-react";
+import { Store as StoreIcon, Pencil, Loader2, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ModalPortal } from "./modal-portal";
-import { StoreStatus } from "@/types/affiliate";
+import { Store, StoreStatus } from "@/types/affiliate";
 
-interface AddStoreModalProps {
-  onStoreCreated?: () => void;
+interface EditStoreModalProps {
+  store: Store;
+  onUpdated?: () => void;
 }
 
-export function AddStoreModal({ onStoreCreated }: AddStoreModalProps) {
+export function EditStoreModal({ store, onUpdated }: EditStoreModalProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
-  // Form State
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [country, setCountry] = useState("Brasil");
-  const [category, setCategory] = useState("Moda & Esportes");
-  const [affiliateNetwork, setAffiliateNetwork] = useState("Awin");
-  const [affiliateProgram, setAffiliateProgram] = useState("");
-  const [status, setStatus] = useState<StoreStatus>("testing");
-  const [dailyBudget, setDailyBudget] = useState("");
-  const [monthlyBudget, setMonthlyBudget] = useState("");
-  const [targetCpa, setTargetCpa] = useState("");
-  const [maxCpc, setMaxCpc] = useState("");
-  const [targetRoi, setTargetRoi] = useState("150");
-  const [brandBiddingAllowed, setBrandBiddingAllowed] = useState(false);
-  const [googleAdsAllowed, setGoogleAdsAllowed] = useState(true);
-  const [dsaAllowed, setDsaAllowed] = useState(false);
-  const [notes, setNotes] = useState("");
+  const [name, setName] = useState(store.name);
+  const [description, setDescription] = useState(store.description || "");
+  const [country, setCountry] = useState(store.country || "");
+  const [category, setCategory] = useState(store.category || "");
+  const [affiliateNetwork, setAffiliateNetwork] = useState(store.affiliate_network);
+  const [affiliateProgram, setAffiliateProgram] = useState(store.affiliate_program || "");
+  const [status, setStatus] = useState<StoreStatus>(store.status);
+  const [dailyBudget, setDailyBudget] = useState(String(store.daily_budget));
+  const [monthlyBudget, setMonthlyBudget] = useState(String(store.monthly_budget));
+  const [targetCpa, setTargetCpa] = useState(String(store.target_cpa));
+  const [maxCpc, setMaxCpc] = useState(String(store.max_cpc));
+  const [targetRoi, setTargetRoi] = useState(String(store.target_roi));
+  const [brandBiddingAllowed, setBrandBiddingAllowed] = useState(store.brand_bidding_allowed);
+  const [googleAdsAllowed, setGoogleAdsAllowed] = useState(store.google_ads_allowed);
+  const [dsaAllowed, setDsaAllowed] = useState(store.dsa_allowed);
+  const [notes, setNotes] = useState(store.notes || "");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,8 +40,8 @@ export function AddStoreModal({ onStoreCreated }: AddStoreModalProps) {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/admin/stores", {
-        method: "POST",
+      const res = await fetch(`/api/admin/stores/${store.id}`, {
+        method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name,
@@ -65,23 +65,14 @@ export function AddStoreModal({ onStoreCreated }: AddStoreModalProps) {
 
       const data = await res.json();
       if (!res.ok) {
-        throw new Error(data.error || "Erro ao cadastrar loja.");
+        throw new Error(data.error || "Erro ao atualizar loja.");
       }
 
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);
         setIsOpen(false);
-        // Reset
-        setName("");
-        setDescription("");
-        setCountry("Brasil");
-        setDailyBudget("");
-        setMonthlyBudget("");
-        setTargetCpa("");
-        setMaxCpc("");
-        setNotes("");
-        if (onStoreCreated) onStoreCreated();
+        if (onUpdated) onUpdated();
         window.location.reload();
       }, 1000);
     } catch (err: unknown) {
@@ -96,10 +87,10 @@ export function AddStoreModal({ onStoreCreated }: AddStoreModalProps) {
       <Button
         onClick={() => setIsOpen(true)}
         variant="outline"
-        className="border-white/20 bg-white/5 text-white hover:bg-white/15 text-xs h-9 px-3 rounded-lg flex items-center gap-1.5"
+        className="border-white/15 bg-white/5 text-white hover:bg-white/15 text-xs h-9 px-3 rounded-lg flex items-center gap-1.5"
       >
-        <StoreIcon className="w-3.5 h-3.5 text-blue-400" />
-        <span>+ Nova Loja</span>
+        <Pencil className="w-3.5 h-3.5 text-purple-400" />
+        <span>Editar</span>
       </Button>
 
       {isOpen && (
@@ -107,12 +98,12 @@ export function AddStoreModal({ onStoreCreated }: AddStoreModalProps) {
           <div className="bg-[#121216] border border-white/10 rounded-xl w-full max-w-xl max-h-[90vh] overflow-y-auto p-6 shadow-2xl">
             <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-5">
               <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400">
+                <div className="p-2 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400">
                   <StoreIcon className="w-5 h-5" />
                 </div>
                 <div>
-                  <h2 className="text-base font-semibold text-white">Cadastrar Nova Loja Afiliada</h2>
-                  <p className="text-xs text-white/50">Defina os parâmetros de orçamento, metas e permissões</p>
+                  <h2 className="text-base font-semibold text-white">Editar Loja Afiliada</h2>
+                  <p className="text-xs text-white/50">Atualize dados cadastrais, país, descrição e parâmetros</p>
                 </div>
               </div>
               <button
@@ -133,7 +124,7 @@ export function AddStoreModal({ onStoreCreated }: AddStoreModalProps) {
 
             {success && (
               <div className="mb-4 p-3 bg-teal-500/10 border border-teal-500/30 text-teal-300 rounded-lg text-xs">
-                ✓ Loja cadastrada com sucesso!
+                ✓ Loja atualizada com sucesso!
               </div>
             )}
 
@@ -211,7 +202,7 @@ export function AddStoreModal({ onStoreCreated }: AddStoreModalProps) {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-white/70 mb-1.5">Status Inicial</label>
+                  <label className="block text-xs font-medium text-white/70 mb-1.5">Status</label>
                   <select
                     value={status}
                     onChange={(e) => setStatus(e.target.value as StoreStatus)}
@@ -225,7 +216,6 @@ export function AddStoreModal({ onStoreCreated }: AddStoreModalProps) {
                 </div>
               </div>
 
-              {/* Metas e Orçamentos */}
               <div className="p-3.5 bg-white/[0.02] border border-white/10 rounded-lg space-y-3">
                 <div className="text-xs font-semibold text-white/80">Controle Orçamentário e Metas</div>
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
@@ -296,7 +286,6 @@ export function AddStoreModal({ onStoreCreated }: AddStoreModalProps) {
                 </div>
               </div>
 
-              {/* Regras e Permissões */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 <label className="flex items-center gap-2 p-2.5 bg-white/[0.02] border border-white/10 rounded-lg text-xs text-white cursor-pointer hover:bg-white/[0.04]">
                   <input
@@ -354,10 +343,10 @@ export function AddStoreModal({ onStoreCreated }: AddStoreModalProps) {
                   type="submit"
                   disabled={loading}
                   size="sm"
-                  className="bg-blue-600 hover:bg-blue-500 text-white font-medium"
+                  className="bg-purple-600 hover:bg-purple-500 text-white font-medium"
                 >
                   {loading ? <Loader2 className="w-4 h-4 animate-spin mr-1.5" /> : null}
-                  Cadastrar Loja
+                  Salvar Alterações
                 </Button>
               </div>
             </form>

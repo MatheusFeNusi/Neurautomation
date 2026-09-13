@@ -10,6 +10,8 @@ export interface Store {
   id: string;
   name: string;
   slug: string;
+  description: string | null;
+  country: string | null;
   category: string | null;
   affiliate_network: string;
   affiliate_program: string | null;

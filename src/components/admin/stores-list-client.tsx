@@ -15,6 +15,7 @@ import {
 import { Store, AdSpend, Sale, StoreStatus } from "@/types/affiliate";
 import { calculateMetrics, evaluateStoreAlerts, formatCurrency, formatPercent } from "@/lib/metrics";
 import { AddStoreModal } from "./add-store-modal";
+import { EditStoreModal } from "./edit-store-modal";
 import { DeleteRowButton } from "./delete-row-button";
 
 interface StoresListClientProps {
@@ -171,6 +172,7 @@ export function StoresListClient({ initialStores, adSpends, sales }: StoresListC
                         </Link>
                         <div className="text-[11px] text-white/40 mt-0.5">
                           {store.category || "Geral"}
+                          {store.country && <span> • {store.country}</span>}
                         </div>
                       </td>
 
@@ -276,6 +278,7 @@ export function StoresListClient({ initialStores, adSpends, sales }: StoresListC
                             <span>Detalhes</span>
                             <ExternalLink className="w-3 h-3" />
                           </Link>
+                          <EditStoreModal store={store} />
                           <DeleteRowButton
                             endpoint={`/api/admin/stores/${store.id}`}
                             label="Excluir"

@@ -10,13 +10,13 @@
 --
 
 -- 1. Exemplo de Lojas (com dados realistas)
-INSERT INTO public.stores (id, name, slug, category, affiliate_network, affiliate_program, brand_bidding_allowed, google_ads_allowed, dsa_allowed, status, daily_budget, monthly_budget, target_cpa, max_cpc, target_roi, notes)
+INSERT INTO public.stores (id, name, slug, description, country, category, affiliate_network, affiliate_program, brand_bidding_allowed, google_ads_allowed, dsa_allowed, status, daily_budget, monthly_budget, target_cpa, max_cpc, target_roi, notes)
 VALUES
-('a1111111-1111-1111-1111-111111111111', 'Nike Brasil', 'nike-brasil', 'Moda & Esportes', 'Awin', 'Nike Oficial', false, true, false, 'active', 500.00, 15000.00, 45.00, 2.80, 180.00, 'Foco em lançamentos de tênis de corrida. Proibido Brand Bidding.'),
-('a2222222-2222-2222-2222-222222222222', 'Kabum', 'kabum', 'Informática & Gamer', 'Lomadee', 'Kabum Hardware', false, true, true, 'active', 800.00, 24000.00, 60.00, 3.50, 150.00, 'Alta conversão em periféricos e placas de vídeo.'),
-('a3333333-3333-3333-3333-333333333333', 'Sephora Brasil', 'sephora-brasil', 'Beleza & Perfumaria', 'Rakuten', 'Sephora Beauty Club', true, true, false, 'testing', 250.00, 7500.00, 35.00, 1.90, 200.00, 'Testando campanhas de perfumes importados masculinos.'),
-('a4444444-4444-4444-4444-444444444444', 'Dell Computadores', 'dell-computadores', 'Tecnologia', 'CJ Affiliate', 'Dell Inspiron/Alienware', false, true, false, 'paused', 300.00, 9000.00, 120.00, 4.20, 120.00, 'Pausado temporariamente devido à alteração de comissão na rede.'),
-('a5555555-5555-5555-5555-555555555555', 'Amazon Brasil', 'amazon-brasil', 'Geral & Eletrônicos', 'Amazon Associates', 'Associados BR', false, true, false, 'active', 1200.00, 36000.00, 25.00, 1.50, 160.00, 'Campanhas em livros, kindles e eletrônicos inteligentes.')
+('a1111111-1111-1111-1111-111111111111', 'Nike Brasil', 'nike-brasil', 'E-commerce oficial da Nike no Brasil com foco em tênis de corrida e moda esportiva.', 'Brasil', 'Moda & Esportes', 'Awin', 'Nike Oficial', false, true, false, 'active', 500.00, 15000.00, 45.00, 2.80, 180.00, 'Foco em lançamentos de tênis de corrida. Proibido Brand Bidding.'),
+('a2222222-2222-2222-2222-222222222222', 'Kabum', 'kabum', 'Maior e-commerce de tecnologia e games da América Latina.', 'Brasil', 'Informática & Gamer', 'Lomadee', 'Kabum Hardware', false, true, true, 'active', 800.00, 24000.00, 60.00, 3.50, 150.00, 'Alta conversão em periféricos e placas de vídeo.'),
+('a3333333-3333-3333-3333-333333333333', 'Sephora Brasil', 'sephora-brasil', 'Varejista de beleza e perfumaria com marcas importadas de luxo.', 'Brasil', 'Beleza & Perfumaria', 'Rakuten', 'Sephora Beauty Club', true, true, false, 'testing', 250.00, 7500.00, 35.00, 1.90, 200.00, 'Testando campanhas de perfumes importados masculinos.'),
+('a4444444-4444-4444-4444-444444444444', 'Dell Computadores', 'dell-computadores', 'Fabricante global de computadores, notebooks e workstations.', 'Brasil', 'Tecnologia', 'CJ Affiliate', 'Dell Inspiron/Alienware', false, true, false, 'paused', 300.00, 9000.00, 120.00, 4.20, 120.00, 'Pausado temporariamente devido à alteração de comissão na rede.'),
+('a5555555-5555-5555-5555-555555555555', 'Amazon Brasil', 'amazon-brasil', 'Gigante do varejo online com catálogo gigante em eletrônicos, livros e casa.', 'Brasil', 'Geral & Eletrônicos', 'Amazon Associates', 'Associados BR', false, true, false, 'active', 1200.00, 36000.00, 25.00, 1.50, 160.00, 'Campanhas em livros, kindles e eletrônicos inteligentes.')
 ON CONFLICT (id) DO NOTHING;
 
 -- 2. Ofertas de Teste

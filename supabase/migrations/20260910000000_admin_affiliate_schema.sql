@@ -39,6 +39,8 @@ CREATE TABLE IF NOT EXISTS public.stores (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name TEXT NOT NULL,
     slug TEXT NOT NULL UNIQUE,
+    description TEXT,
+    country TEXT,
     category TEXT,
     affiliate_network TEXT NOT NULL,
     affiliate_program TEXT,
