@@ -137,3 +137,16 @@ export interface StoreBudgetAlert {
 }
 
 export type DatePeriod = 'today' | 'yesterday' | '7d' | '30d' | 'this_month' | 'last_month' | 'custom';
+
+export type NotePriority = 'low' | 'medium' | 'high';
+
+export interface Note {
+  id: string;
+  title: string;
+  content: string | null;
+  done: boolean;
+  pinned: boolean;
+  priority: NotePriority;
+  created_at: string;
+  updated_at: string;
+}

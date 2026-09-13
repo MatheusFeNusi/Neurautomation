@@ -14,6 +14,7 @@ import {
   BarChart3,
   Activity,
   FlaskConical,
+  StickyNote,
   Settings,
   LogOut,
   ShieldCheck,
@@ -35,6 +36,7 @@ const NAV_ITEMS = [
   { href: "/admin/profit", label: "Profit", icon: TrendingUp },
   { href: "/admin/analytics", label: "Analytics", icon: BarChart3 },
   { href: "/admin/performance", label: "Store Performance", icon: Activity },
+  { href: "/admin/notes", label: "Notas & Tarefas", icon: StickyNote },
   { href: "/admin/testing", label: "Testing", icon: FlaskConical },
   { href: "/admin/settings", label: "Settings", icon: Settings },
 ];
