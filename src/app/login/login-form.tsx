@@ -13,7 +13,7 @@ import { isSupabaseConfigured } from "@/lib/supabase/config";
 export function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const next = searchParams.get("next") ?? "/painel";
+  const next = searchParams.get("next") ?? "/admin/overview";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -47,7 +47,6 @@ export function LoginForm() {
     }
 
     router.replace(next);
-    router.refresh();
   };
 
   const handlePasswordReset = async () => {
