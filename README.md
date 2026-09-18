@@ -17,7 +17,7 @@ Os componentes shadcn ficam em `src/components/ui` porque é o caminho definido 
 | --- | --- |
 | `/` | Home: header, hero, órbita das 4 frentes, footer |
 | `/login` | Login por e-mail + senha, com "esqueci minha senha" |
-| `/painel` | Área restrita: redireciona para o painel NeuraAI (`NEXT_PUBLIC_PAINEL_URL`, padrão `/admin`), protegida por `src/proxy.ts` |
+| `/painel` | Área restrita: redireciona para o painel NeuraAI (`NEXT_PUBLIC_PAINEL_URL`, padrão `https://home.neurautomation.com/admin`), protegida por `src/proxy.ts` |
 | `/auth/callback` | Troca do `code` do link de e-mail por sessão |
 | `/auth/signout` | Encerra a sessão |
 
