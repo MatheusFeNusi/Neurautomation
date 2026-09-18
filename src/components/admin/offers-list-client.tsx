@@ -75,15 +75,15 @@ export function OffersListClient({ initialOffers, stores }: OffersListClientProp
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 pb-5">
         <div>
-          <h1 className="text-2xl font-bold text-white tracking-tight flex items-center gap-2.5">
+          <h1 className="text-2xl font-bold text-gray-900 tracking-tight flex items-center gap-2.5">
             <span>Catálogo de Ofertas</span>
-            <span className="text-xs bg-purple-500/20 text-purple-300 font-medium px-2 py-0.5 rounded-full border border-purple-500/30">
+            <span className="text-xs bg-purple-50 text-purple-700 font-medium px-2 py-0.5 rounded-full border border-purple-200">
               {filteredOffers.length} Ofertas
             </span>
           </h1>
-          <p className="text-xs text-white/50 mt-1">
+          <p className="text-xs text-gray-500 mt-1">
             Cadastre os produtos e ofertas específicos vinculados às lojas de afiliação
           </p>
         </div>
@@ -98,16 +98,16 @@ export function OffersListClient({ initialOffers, stores }: OffersListClientProp
       </div>
 
       {/* Filter */}
-      <div className="flex items-center gap-3 bg-[#121216] p-3 rounded-xl border border-white/10">
-        <label className="text-xs text-white/60">Filtrar por Loja:</label>
+      <div className="flex items-center gap-3 bg-white p-3 rounded-xl border border-gray-200">
+        <label className="text-xs text-gray-600">Filtrar por Loja:</label>
         <select
           value={selectedStore}
           onChange={(e) => setSelectedStore(e.target.value)}
-          className="bg-white/5 border border-white/10 rounded-lg px-2.5 py-1 text-xs text-white focus:outline-none focus:border-purple-500"
+          className="bg-gray-100 border border-gray-200 rounded-lg px-2.5 py-1 text-xs text-gray-900 focus:outline-none focus:border-purple-500"
         >
-          <option value="all" className="bg-[#18181b] text-white">Todas as Lojas</option>
+          <option value="all" className="bg-white text-gray-900">Todas as Lojas</option>
           {stores.map((s) => (
-            <option key={s.id} value={s.id} className="bg-[#18181b] text-white">
+            <option key={s.id} value={s.id} className="bg-white text-gray-900">
               {s.name}
             </option>
           ))}
@@ -115,9 +115,9 @@ export function OffersListClient({ initialOffers, stores }: OffersListClientProp
       </div>
 
       {/* Table */}
-      <div className="bg-[#121216] border border-white/10 rounded-xl overflow-hidden shadow-xl">
+      <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-xl">
         <table className="w-full text-left text-xs">
-          <thead className="bg-white/[0.03] text-white/50 border-b border-white/10 font-semibold uppercase text-[10px]">
+          <thead className="bg-gray-50 text-gray-500 border-b border-gray-200 font-semibold uppercase text-[10px]">
             <tr>
               <th className="py-3 px-4">Oferta / Descrição</th>
               <th className="py-3 px-3">Loja Vinculada</th>
@@ -129,8 +129,8 @@ export function OffersListClient({ initialOffers, stores }: OffersListClientProp
           <tbody className="divide-y divide-white/5">
             {filteredOffers.length === 0 ? (
               <tr>
-                <td colSpan={5} className="py-12 text-center text-white/40">
-                  <Tag className="w-8 h-8 mx-auto mb-2 text-white/20" />
+                <td colSpan={5} className="py-12 text-center text-gray-400">
+                  <Tag className="w-8 h-8 mx-auto mb-2 text-gray-300" />
                   Nenhuma oferta cadastrada. Clique em &quot;+ Nova Oferta&quot; acima.
                 </td>
               </tr>
@@ -138,19 +138,19 @@ export function OffersListClient({ initialOffers, stores }: OffersListClientProp
               filteredOffers.map((offer) => {
                 const store = stores.find((s) => s.id === offer.store_id);
                 return (
-                  <tr key={offer.id} className="hover:bg-white/[0.02] transition-colors">
+                  <tr key={offer.id} className="hover:bg-gray-50 transition-colors">
                     <td className="py-3.5 px-4">
-                      <div className="font-semibold text-white">{offer.name}</div>
-                      <div className="text-[11px] text-white/40">{offer.description || "Sem descrição"}</div>
+                      <div className="font-semibold text-gray-900">{offer.name}</div>
+                      <div className="text-[11px] text-gray-400">{offer.description || "Sem descrição"}</div>
                     </td>
-                    <td className="py-3.5 px-3 font-medium text-white/80">
+                    <td className="py-3.5 px-3 font-medium text-gray-800">
                       {store ? store.name : "Loja Desconhecida"}
                     </td>
-                    <td className="py-3.5 px-3 font-semibold text-purple-300">
+                    <td className="py-3.5 px-3 font-semibold text-purple-700">
                       {offer.payout_type === "percentage" ? `${offer.payout_value}%` : formatCurrency(offer.payout_value)}
                     </td>
                     <td className="py-3.5 px-3">
-                      <span className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded text-[10px]">
+                      <span className="bg-emerald-50 text-emerald-600 border border-emerald-200 px-2 py-0.5 rounded text-[10px]">
                         {offer.status.toUpperCase()}
                       </span>
                     </td>
@@ -160,7 +160,7 @@ export function OffersListClient({ initialOffers, stores }: OffersListClientProp
                           href={offer.landing_page_url}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex items-center gap-1 text-[11px] text-blue-400 hover:text-blue-300 bg-blue-500/10 px-2 py-0.5 rounded"
+                          className="inline-flex items-center gap-1 text-[11px] text-blue-600 hover:text-blue-700 bg-blue-50 px-2 py-0.5 rounded"
                         >
                           <span>Página</span>
                           <ExternalLink className="w-3 h-3" />
@@ -171,7 +171,7 @@ export function OffersListClient({ initialOffers, stores }: OffersListClientProp
                           href={offer.affiliate_link}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex items-center gap-1 text-[11px] text-purple-400 hover:text-purple-300 bg-purple-500/10 px-2 py-0.5 rounded"
+                          className="inline-flex items-center gap-1 text-[11px] text-purple-600 hover:text-purple-700 bg-purple-50 px-2 py-0.5 rounded"
                         >
                           <span>Link Afiliado</span>
                           <ExternalLink className="w-3 h-3" />
@@ -193,14 +193,14 @@ export function OffersListClient({ initialOffers, stores }: OffersListClientProp
       {/* Modal Nova Oferta */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in">
-          <div className="bg-[#121216] border border-white/10 rounded-xl w-full max-w-md p-6 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
-              <h2 className="text-base font-semibold text-white">Adicionar Oferta</h2>
-              <button type="button" onClick={() => setIsModalOpen(false)} className="text-white/40 hover:text-white">✕</button>
+          <div className="bg-white border border-gray-200 rounded-xl w-full max-w-md p-6 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-gray-200 pb-3 mb-4">
+              <h2 className="text-base font-semibold text-gray-900">Adicionar Oferta</h2>
+              <button type="button" onClick={() => setIsModalOpen(false)} className="text-gray-400 hover:text-gray-900">✕</button>
             </div>
 
             {error && (
-              <div className="mb-4 p-3 bg-red-500/10 border border-red-500/30 text-red-400 rounded-lg text-xs flex items-center gap-2">
+              <div className="mb-4 p-3 bg-red-50 border border-red-500/30 text-red-600 rounded-lg text-xs flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 flex-shrink-0" />
                 <span>{error}</span>
               </div>
@@ -208,15 +208,15 @@ export function OffersListClient({ initialOffers, stores }: OffersListClientProp
 
             <form onSubmit={handleCreateOffer} className="space-y-3.5">
               <div>
-                <label className="block text-xs font-medium text-white/70 mb-1">Loja *</label>
+                <label className="block text-xs font-medium text-gray-700 mb-1">Loja *</label>
                 <select
                   value={storeId}
                   onChange={(e) => setStoreId(e.target.value)}
                   required
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500"
+                  className="w-full bg-gray-100 border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 focus:outline-none focus:border-purple-500"
                 >
                   {stores.map((s) => (
-                    <option key={s.id} value={s.id} className="bg-[#18181b] text-white">
+                    <option key={s.id} value={s.id} className="bg-white text-gray-900">
                       {s.name}
                     </option>
                   ))}
@@ -224,32 +224,32 @@ export function OffersListClient({ initialOffers, stores }: OffersListClientProp
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-white/70 mb-1">Nome da Oferta / Produto *</label>
+                <label className="block text-xs font-medium text-gray-700 mb-1">Nome da Oferta / Produto *</label>
                 <input
                   type="text"
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Ex: Tênis Air Zoom Pegasus 41"
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500"
+                  className="w-full bg-gray-100 border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 focus:outline-none focus:border-purple-500"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-medium text-white/70 mb-1">Tipo de Payout</label>
+                  <label className="block text-xs font-medium text-gray-700 mb-1">Tipo de Payout</label>
                   <select
                     value={payoutType}
                     onChange={(e) => setPayoutType(e.target.value as "percentage" | "fixed")}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500"
+                    className="w-full bg-gray-100 border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 focus:outline-none focus:border-purple-500"
                   >
-                    <option value="percentage" className="bg-[#18181b] text-white">Porcentagem (%)</option>
-                    <option value="fixed" className="bg-[#18181b] text-white">Fixo (R$)</option>
+                    <option value="percentage" className="bg-white text-gray-900">Porcentagem (%)</option>
+                    <option value="fixed" className="bg-white text-gray-900">Fixo (R$)</option>
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-white/70 mb-1">Valor do Payout *</label>
+                  <label className="block text-xs font-medium text-gray-700 mb-1">Valor do Payout *</label>
                   <input
                     type="number"
                     step="0.1"
@@ -258,40 +258,40 @@ export function OffersListClient({ initialOffers, stores }: OffersListClientProp
                     value={payoutValue}
                     onChange={(e) => setPayoutValue(e.target.value)}
                     placeholder="Ex: 8.5"
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500"
+                    className="w-full bg-gray-100 border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 focus:outline-none focus:border-purple-500"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-white/70 mb-1">Landing Page URL</label>
+                <label className="block text-xs font-medium text-gray-700 mb-1">Landing Page URL</label>
                 <input
                   type="url"
                   value={landingPageUrl}
                   onChange={(e) => setLandingPageUrl(e.target.value)}
                   placeholder="https://..."
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500"
+                  className="w-full bg-gray-100 border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 focus:outline-none focus:border-purple-500"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-white/70 mb-1">Link de Afiliado</label>
+                <label className="block text-xs font-medium text-gray-700 mb-1">Link de Afiliado</label>
                 <input
                   type="url"
                   value={affiliateLink}
                   onChange={(e) => setAffiliateLink(e.target.value)}
                   placeholder="https://awin1.com/..."
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500"
+                  className="w-full bg-gray-100 border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 focus:outline-none focus:border-purple-500"
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-3 border-t border-white/10">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-gray-200">
                 <Button
                   type="button"
                   variant="outline"
                   size="sm"
                   onClick={() => setIsModalOpen(false)}
-                  className="border-white/10 text-white/60 hover:text-white"
+                  className="border-gray-200 text-gray-600 hover:text-gray-900"
                 >
                   Cancelar
                 </Button>

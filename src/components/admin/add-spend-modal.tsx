@@ -84,43 +84,43 @@ export function AddSpendModal({ stores, campaigns, onSpendCreated }: AddSpendMod
       <Button
         onClick={() => setIsOpen(true)}
         variant="outline"
-        className="border-white/20 bg-white/5 text-white hover:bg-white/15 text-xs h-9 px-3 rounded-lg flex items-center gap-1.5"
+        className="border-gray-300 bg-gray-100 text-gray-900 hover:bg-gray-200 text-xs h-9 px-3 rounded-lg flex items-center gap-1.5"
       >
-        <DollarSign className="w-3.5 h-3.5 text-amber-400" />
+        <DollarSign className="w-3.5 h-3.5 text-amber-600" />
         <span>+ Lançar Gasto Diário</span>
       </Button>
 
       {isOpen && (
         <ModalPortal>
-          <div className="bg-[#121216] border border-white/10 rounded-xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-6 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-5">
+          <div className="bg-white border border-gray-200 rounded-xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-6 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-gray-200 pb-4 mb-5">
               <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400">
+                <div className="p-2 rounded-lg bg-amber-50 border border-amber-200 text-amber-600">
                   <DollarSign className="w-5 h-5" />
                 </div>
                 <div>
-                  <h2 className="text-base font-semibold text-white">Lançar Custo de Anúncio Diário</h2>
-                  <p className="text-xs text-white/50">Google Ads ou outras fontes manuais</p>
+                  <h2 className="text-base font-semibold text-gray-900">Lançar Custo de Anúncio Diário</h2>
+                  <p className="text-xs text-gray-500">Google Ads ou outras fontes manuais</p>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
-                className="text-white/40 hover:text-white text-lg font-light"
+                className="text-gray-400 hover:text-gray-900 text-lg font-light"
               >
                 ✕
               </button>
             </div>
 
             {error && (
-              <div className="mb-4 p-3 bg-red-500/10 border border-red-500/30 text-red-400 rounded-lg text-xs flex items-center gap-2">
+              <div className="mb-4 p-3 bg-red-50 border border-red-500/30 text-red-600 rounded-lg text-xs flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 flex-shrink-0" />
                 <span>{error}</span>
               </div>
             )}
 
             {success && (
-              <div className="mb-4 p-3 bg-teal-500/10 border border-teal-500/30 text-teal-300 rounded-lg text-xs">
+              <div className="mb-4 p-3 bg-teal-50 border border-teal-200 text-teal-700 rounded-lg text-xs">
                 ✓ Investimento registrado com sucesso!
               </div>
             )}
@@ -128,15 +128,15 @@ export function AddSpendModal({ stores, campaigns, onSpendCreated }: AddSpendMod
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-white/70 mb-1.5">Loja *</label>
+                  <label className="block text-xs font-medium text-gray-700 mb-1.5">Loja *</label>
                   <select
                     value={storeId}
                     onChange={(e) => handleStoreChange(e.target.value)}
                     required
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500"
+                    className="w-full bg-gray-100 border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 focus:outline-none focus:border-amber-500"
                   >
                     {stores.map((s) => (
-                      <option key={s.id} value={s.id} className="bg-[#18181b] text-white">
+                      <option key={s.id} value={s.id} className="bg-white text-gray-900">
                         {s.name}
                       </option>
                     ))}
@@ -144,15 +144,15 @@ export function AddSpendModal({ stores, campaigns, onSpendCreated }: AddSpendMod
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-white/70 mb-1.5">Campanha *</label>
+                  <label className="block text-xs font-medium text-gray-700 mb-1.5">Campanha *</label>
                   <select
                     value={campaignId}
                     onChange={(e) => setCampaignId(e.target.value)}
                     required
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500"
+                    className="w-full bg-gray-100 border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 focus:outline-none focus:border-amber-500"
                   >
                     {filteredCampaigns.map((c) => (
-                      <option key={c.id} value={c.id} className="bg-[#18181b] text-white">
+                      <option key={c.id} value={c.id} className="bg-white text-gray-900">
                         {c.name}
                       </option>
                     ))}
@@ -162,18 +162,18 @@ export function AddSpendModal({ stores, campaigns, onSpendCreated }: AddSpendMod
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 <div>
-                  <label className="block text-xs font-medium text-white/70 mb-1.5">Data *</label>
+                  <label className="block text-xs font-medium text-gray-700 mb-1.5">Data *</label>
                   <input
                     type="date"
                     required
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500"
+                    className="w-full bg-gray-100 border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 focus:outline-none focus:border-amber-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-white/70 mb-1.5">Valor Investido (R$) *</label>
+                  <label className="block text-xs font-medium text-gray-700 mb-1.5">Valor Investido (R$) *</label>
                   <input
                     type="number"
                     step="0.01"
@@ -182,12 +182,12 @@ export function AddSpendModal({ stores, campaigns, onSpendCreated }: AddSpendMod
                     value={cost}
                     onChange={(e) => setCost(e.target.value)}
                     placeholder="350.00"
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500"
+                    className="w-full bg-gray-100 border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 focus:outline-none focus:border-amber-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-white/70 mb-1.5">Cliques *</label>
+                  <label className="block text-xs font-medium text-gray-700 mb-1.5">Cliques *</label>
                   <input
                     type="number"
                     min="0"
@@ -195,26 +195,26 @@ export function AddSpendModal({ stores, campaigns, onSpendCreated }: AddSpendMod
                     value={clicks}
                     onChange={(e) => setClicks(e.target.value)}
                     placeholder="120"
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500"
+                    className="w-full bg-gray-100 border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 focus:outline-none focus:border-amber-500"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 <div>
-                  <label className="block text-xs font-medium text-white/70 mb-1.5">Impressões</label>
+                  <label className="block text-xs font-medium text-gray-700 mb-1.5">Impressões</label>
                   <input
                     type="number"
                     min="0"
                     value={impressions}
                     onChange={(e) => setImpressions(e.target.value)}
                     placeholder="2500"
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500"
+                    className="w-full bg-gray-100 border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 focus:outline-none focus:border-amber-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-white/70 mb-1.5">Conversões Ads</label>
+                  <label className="block text-xs font-medium text-gray-700 mb-1.5">Conversões Ads</label>
                   <input
                     type="number"
                     min="0"
@@ -222,12 +222,12 @@ export function AddSpendModal({ stores, campaigns, onSpendCreated }: AddSpendMod
                     value={conversions}
                     onChange={(e) => setConversions(e.target.value)}
                     placeholder="5"
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500"
+                    className="w-full bg-gray-100 border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 focus:outline-none focus:border-amber-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-white/70 mb-1.5">Valor Conversão (R$)</label>
+                  <label className="block text-xs font-medium text-gray-700 mb-1.5">Valor Conversão (R$)</label>
                   <input
                     type="number"
                     step="0.01"
@@ -235,18 +235,18 @@ export function AddSpendModal({ stores, campaigns, onSpendCreated }: AddSpendMod
                     value={conversionValue}
                     onChange={(e) => setConversionValue(e.target.value)}
                     placeholder="2450.00"
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500"
+                    className="w-full bg-gray-100 border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 focus:outline-none focus:border-amber-500"
                   />
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-3 pt-3 border-t border-white/10">
+              <div className="flex items-center justify-end gap-3 pt-3 border-t border-gray-200">
                 <Button
                   type="button"
                   variant="outline"
                   size="sm"
                   onClick={() => setIsOpen(false)}
-                  className="border-white/10 text-white/60 hover:text-white hover:bg-white/5"
+                  className="border-gray-200 text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                 >
                   Cancelar
                 </Button>

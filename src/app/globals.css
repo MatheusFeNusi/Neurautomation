@@ -128,3 +128,60 @@
     @apply font-sans;
   }
 }
+
+/* ============================================================
+   ADMIN — Tema claro + Inter + Tipografia ampliada
+   Os tamanhos abaixo sobrescrevem os utilitários Tailwind apenas
+   dentro do painel (admin-shell e admin-portal/modais).
+   ============================================================ */
+.admin-shell,
+.admin-portal {
+  font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+}
+
+.admin-shell .text-[10px],
+.admin-portal .text-[10px] {
+  font-size: 0.6875rem;
+  line-height: 1rem;
+}
+.admin-shell .text-[11px],
+.admin-portal .text-[11px] {
+  font-size: 0.75rem;
+  line-height: 1.125rem;
+}
+.admin-shell .text-xs,
+.admin-portal .text-xs {
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+}
+.admin-shell .text-sm,
+.admin-portal .text-sm {
+  font-size: 0.9375rem;
+  line-height: 1.375rem;
+}
+.admin-shell .text-base,
+.admin-portal .text-base {
+  font-size: 1.0625rem;
+  line-height: 1.5rem;
+}
+.admin-shell .text-lg,
+.admin-portal .text-lg {
+  font-size: 1.1875rem;
+  line-height: 1.625rem;
+}
+.admin-shell .text-xl,
+.admin-portal .text-xl {
+  font-size: 1.3125rem;
+  line-height: 1.75rem;
+}
+.admin-shell .text-2xl,
+.admin-portal .text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+.admin-shell .text-3xl,
+.admin-portal .text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}

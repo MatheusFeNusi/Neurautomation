@@ -78,34 +78,34 @@ export function PerformanceClient({ stores, adSpends, sales }: PerformanceClient
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 pb-5">
         <div>
-          <h1 className="text-2xl font-bold text-white tracking-tight flex items-center gap-2.5">
+          <h1 className="text-2xl font-bold text-gray-900 tracking-tight flex items-center gap-2.5">
             <span>Matriz Comparativa de Performance</span>
-            <span className="text-xs bg-emerald-500/20 text-emerald-300 font-medium px-2 py-0.5 rounded-full border border-emerald-500/30">
+            <span className="text-xs bg-emerald-50 text-emerald-700 font-medium px-2 py-0.5 rounded-full border border-emerald-200">
               {sortedAndFilteredData.length} Lojas Classificadas
             </span>
           </h1>
-          <p className="text-xs text-white/50 mt-1">
+          <p className="text-xs text-gray-500 mt-1">
             Ranking analítico e ordenação multi-critério para escala de até 300 lojas simultâneas
           </p>
         </div>
 
         {/* Seletor de Ordenação Rápida */}
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-2 bg-[#121216] border border-white/10 px-3 py-1.5 rounded-xl">
-            <ArrowUpDown className="w-3.5 h-3.5 text-purple-400" />
-            <span className="text-xs text-white/60">Ordenar por:</span>
+          <div className="flex items-center gap-2 bg-white border border-gray-200 px-3 py-1.5 rounded-xl">
+            <ArrowUpDown className="w-3.5 h-3.5 text-purple-600" />
+            <span className="text-xs text-gray-600">Ordenar por:</span>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as SortOption)}
-              className="bg-transparent text-xs text-white font-semibold focus:outline-none cursor-pointer"
+              className="bg-transparent text-xs text-gray-900 font-semibold focus:outline-none cursor-pointer"
             >
-              <option value="profit_desc" className="bg-[#18181b] text-white">Maior Lucro Líquido</option>
-              <option value="roi_desc" className="bg-[#18181b] text-white">Maior ROI (%)</option>
-              <option value="commission_desc" className="bg-[#18181b] text-white">Maior Comissão</option>
-              <option value="cpa_asc" className="bg-[#18181b] text-white">Menor CPA (Mais Eficiente)</option>
-              <option value="conversion_rate_desc" className="bg-[#18181b] text-white">Maior Taxa de Conversão</option>
+              <option value="profit_desc" className="bg-white text-gray-900">Maior Lucro Líquido</option>
+              <option value="roi_desc" className="bg-white text-gray-900">Maior ROI (%)</option>
+              <option value="commission_desc" className="bg-white text-gray-900">Maior Comissão</option>
+              <option value="cpa_asc" className="bg-white text-gray-900">Menor CPA (Mais Eficiente)</option>
+              <option value="conversion_rate_desc" className="bg-white text-gray-900">Maior Taxa de Conversão</option>
             </select>
           </div>
 
@@ -129,7 +129,7 @@ export function PerformanceClient({ stores, adSpends, sales }: PerformanceClient
                 }))
               )
             }
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-white/5 border border-white/10 text-white/70 hover:text-white hover:bg-white/10 rounded-xl transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-gray-100 border border-gray-200 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-xl transition-colors"
             title="Exportar CSV"
           >
             <Download className="w-3.5 h-3.5" />
@@ -139,15 +139,15 @@ export function PerformanceClient({ stores, adSpends, sales }: PerformanceClient
       </div>
 
       {/* Multi-Filters */}
-      <div className="flex flex-wrap items-center justify-between gap-3 bg-[#121216] p-3 rounded-xl border border-white/10">
+      <div className="flex flex-wrap items-center justify-between gap-3 bg-white p-3 rounded-xl border border-gray-200">
         <div className="relative w-full sm:w-72">
-          <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-white/40" />
+          <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Buscar loja..."
-            className="w-full bg-white/5 border border-white/10 rounded-lg pl-8 pr-3 py-1.5 text-xs text-white placeholder:text-white/30 focus:outline-none focus:border-purple-500"
+            className="w-full bg-gray-100 border border-gray-200 rounded-lg pl-8 pr-3 py-1.5 text-xs text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-purple-500"
           />
         </div>
 
@@ -156,11 +156,11 @@ export function PerformanceClient({ stores, adSpends, sales }: PerformanceClient
           <select
             value={selectedNetwork}
             onChange={(e) => setSelectedNetwork(e.target.value)}
-            className="bg-white/5 border border-white/10 rounded-lg px-2.5 py-1 text-xs text-white focus:outline-none focus:border-purple-500"
+            className="bg-gray-100 border border-gray-200 rounded-lg px-2.5 py-1 text-xs text-gray-900 focus:outline-none focus:border-purple-500"
           >
-            <option value="all" className="bg-[#18181b] text-white">Todas as Redes</option>
+            <option value="all" className="bg-white text-gray-900">Todas as Redes</option>
             {networks.map((n) => (
-              <option key={n} value={n} className="bg-[#18181b] text-white">{n}</option>
+              <option key={n} value={n} className="bg-white text-gray-900">{n}</option>
             ))}
           </select>
 
@@ -168,11 +168,11 @@ export function PerformanceClient({ stores, adSpends, sales }: PerformanceClient
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="bg-white/5 border border-white/10 rounded-lg px-2.5 py-1 text-xs text-white focus:outline-none focus:border-purple-500"
+            className="bg-gray-100 border border-gray-200 rounded-lg px-2.5 py-1 text-xs text-gray-900 focus:outline-none focus:border-purple-500"
           >
-            <option value="all" className="bg-[#18181b] text-white">Todas as Categorias</option>
+            <option value="all" className="bg-white text-gray-900">Todas as Categorias</option>
             {categories.map((c) => (
-              <option key={c} value={c} className="bg-[#18181b] text-white">{c}</option>
+              <option key={c} value={c} className="bg-white text-gray-900">{c}</option>
             ))}
           </select>
 
@@ -180,21 +180,21 @@ export function PerformanceClient({ stores, adSpends, sales }: PerformanceClient
           <select
             value={selectedStatus}
             onChange={(e) => setSelectedStatus(e.target.value)}
-            className="bg-white/5 border border-white/10 rounded-lg px-2.5 py-1 text-xs text-white focus:outline-none focus:border-purple-500"
+            className="bg-gray-100 border border-gray-200 rounded-lg px-2.5 py-1 text-xs text-gray-900 focus:outline-none focus:border-purple-500"
           >
-            <option value="all" className="bg-[#18181b] text-white">Todos os Status</option>
-            <option value="active" className="bg-[#18181b] text-white">Ativa</option>
-            <option value="testing" className="bg-[#18181b] text-white">Em Teste</option>
-            <option value="paused" className="bg-[#18181b] text-white">Pausada</option>
+            <option value="all" className="bg-white text-gray-900">Todos os Status</option>
+            <option value="active" className="bg-white text-gray-900">Ativa</option>
+            <option value="testing" className="bg-white text-gray-900">Em Teste</option>
+            <option value="paused" className="bg-white text-gray-900">Pausada</option>
           </select>
         </div>
       </div>
 
       {/* Matriz Comparativa (Tabela Completa de 300 lojas) */}
-      <div className="bg-[#121216] border border-white/10 rounded-xl overflow-hidden shadow-xl">
+      <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-xl">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-white/[0.03] text-white/50 border-b border-white/10 font-semibold uppercase text-[10px]">
+            <thead className="bg-gray-50 text-gray-500 border-b border-gray-200 font-semibold uppercase text-[10px]">
               <tr>
                 <th className="py-3 px-4"># Rank / Loja</th>
                 <th className="py-3 px-3">Rede</th>
@@ -205,52 +205,52 @@ export function PerformanceClient({ stores, adSpends, sales }: PerformanceClient
                 <th className="py-3 px-3 text-right">Comissão</th>
                 <th className="py-3 px-3 text-right">CPA</th>
                 <th className="py-3 px-3 text-right">EPC</th>
-                <th className="py-3 px-3 text-right font-bold text-white">Lucro Líquido</th>
-                <th className="py-3 px-3 text-right font-bold text-white">ROI</th>
+                <th className="py-3 px-3 text-right font-bold text-gray-900">Lucro Líquido</th>
+                <th className="py-3 px-3 text-right font-bold text-gray-900">ROI</th>
                 <th className="py-3 px-3 text-center">Status</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5">
               {sortedAndFilteredData.length === 0 ? (
                 <tr>
-                  <td colSpan={12} className="py-12 text-center text-white/40">
-                    <Activity className="w-8 h-8 mx-auto mb-2 text-white/20" />
+                  <td colSpan={12} className="py-12 text-center text-gray-400">
+                    <Activity className="w-8 h-8 mx-auto mb-2 text-gray-300" />
                     Nenhuma loja para exibir com os filtros atuais.
                   </td>
                 </tr>
               ) : (
                 sortedAndFilteredData.map(({ store, metrics }, index) => (
-                  <tr key={store.id} className="hover:bg-white/[0.02] transition-colors group">
+                  <tr key={store.id} className="hover:bg-gray-50 transition-colors group">
                     <td className="py-3.5 px-4">
                       <div className="flex items-center gap-2">
-                        <span className="font-mono text-white/30 text-[11px] w-5">
+                        <span className="font-mono text-gray-400 text-[11px] w-5">
                           {index + 1}°
                         </span>
                         <Link
                           href={`/admin/stores/${store.slug || store.id}`}
-                          className="font-semibold text-white group-hover:text-blue-400 transition-colors flex items-center gap-1"
+                          className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors flex items-center gap-1"
                         >
                           <span>{store.name}</span>
-                          <ExternalLink className="w-3 h-3 text-white/20 group-hover:text-blue-400" />
+                          <ExternalLink className="w-3 h-3 text-gray-300 group-hover:text-blue-600" />
                         </Link>
                       </div>
                     </td>
 
-                    <td className="py-3.5 px-3 text-white/70">{store.affiliate_network}</td>
-                    <td className="py-3.5 px-3 text-right font-mono text-white">{metrics.clicks}</td>
-                    <td className="py-3.5 px-3 text-right font-semibold text-teal-400">{metrics.sales_count}</td>
-                    <td className="py-3.5 px-3 text-right text-white/80">{formatPercent(metrics.conversion_rate)}</td>
-                    <td className="py-3.5 px-3 text-right text-amber-300 font-medium">{formatCurrency(metrics.ad_spend)}</td>
-                    <td className="py-3.5 px-3 text-right text-purple-300 font-semibold">{formatCurrency(metrics.total_commission)}</td>
-                    <td className="py-3.5 px-3 text-right font-mono text-white/70">{formatCurrency(metrics.cpa)}</td>
-                    <td className="py-3.5 px-3 text-right font-mono text-white/70">{formatCurrency(metrics.epc)}</td>
+                    <td className="py-3.5 px-3 text-gray-700">{store.affiliate_network}</td>
+                    <td className="py-3.5 px-3 text-right font-mono text-gray-900">{metrics.clicks}</td>
+                    <td className="py-3.5 px-3 text-right font-semibold text-teal-600">{metrics.sales_count}</td>
+                    <td className="py-3.5 px-3 text-right text-gray-800">{formatPercent(metrics.conversion_rate)}</td>
+                    <td className="py-3.5 px-3 text-right text-amber-800 font-medium">{formatCurrency(metrics.ad_spend)}</td>
+                    <td className="py-3.5 px-3 text-right text-purple-700 font-semibold">{formatCurrency(metrics.total_commission)}</td>
+                    <td className="py-3.5 px-3 text-right font-mono text-gray-700">{formatCurrency(metrics.cpa)}</td>
+                    <td className="py-3.5 px-3 text-right font-mono text-gray-700">{formatCurrency(metrics.epc)}</td>
                     <td className="py-3.5 px-3 text-right">
-                      <span className={`font-bold text-sm ${metrics.profit >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                      <span className={`font-bold text-sm ${metrics.profit >= 0 ? "text-emerald-600" : "text-red-600"}`}>
                         {formatCurrency(metrics.profit)}
                       </span>
                     </td>
                     <td className="py-3.5 px-3 text-right font-bold">
-                      <span className={metrics.roi >= 0 ? "text-emerald-400" : "text-red-400"}>
+                      <span className={metrics.roi >= 0 ? "text-emerald-600" : "text-red-600"}>
                         {formatPercent(metrics.roi)}
                       </span>
                     </td>
@@ -258,10 +258,10 @@ export function PerformanceClient({ stores, adSpends, sales }: PerformanceClient
                       <span
                         className={`text-[10px] font-medium px-2 py-0.5 rounded-full border ${
                           store.status === "active"
-                            ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+                            ? "bg-emerald-50 text-emerald-600 border-emerald-200"
                             : store.status === "testing"
-                            ? "bg-blue-500/10 text-blue-400 border-blue-500/20"
-                            : "bg-amber-500/10 text-amber-400 border-amber-500/20"
+                            ? "bg-blue-50 text-blue-600 border-blue-200"
+                            : "bg-amber-50 text-amber-600 border-amber-200"
                         }`}
                       >
                         {store.status.toUpperCase()}

@@ -111,25 +111,25 @@ export function StoreDetailClient({
   return (
     <div className="space-y-6">
       {/* Back Navigation & Store Title */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 pb-5">
         <div>
           <Link
             href="/admin/stores"
-            className="inline-flex items-center gap-1.5 text-xs text-white/50 hover:text-white mb-2 transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-900 mb-2 transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Voltar para Lojas Afiliadas</span>
           </Link>
 
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-bold text-white tracking-tight">{store.name}</h1>
+            <h1 className="text-2xl font-bold text-gray-900 tracking-tight">{store.name}</h1>
             <span
               className={`text-xs font-medium px-2.5 py-0.5 rounded-full border ${
                 store.status === "active"
-                  ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
+                  ? "bg-emerald-50 text-emerald-600 border-emerald-200"
                   : store.status === "testing"
-                  ? "bg-blue-500/10 text-blue-400 border-blue-500/30"
-                  : "bg-amber-500/10 text-amber-400 border-amber-500/30"
+                  ? "bg-blue-50 text-blue-600 border-blue-200"
+                  : "bg-amber-50 text-amber-600 border-amber-200"
               }`}
             >
               {store.status.toUpperCase()}
@@ -137,17 +137,17 @@ export function StoreDetailClient({
             <EditStoreModal store={store} />
           </div>
 
-          <div className="text-xs text-white/50 mt-1 flex items-center gap-3 flex-wrap">
-            <span>País: <strong className="text-white">{store.country || "—"}</strong></span>
-            <span>Rede: <strong className="text-white">{store.affiliate_network}</strong></span>
+          <div className="text-xs text-gray-500 mt-1 flex items-center gap-3 flex-wrap">
+            <span>País: <strong className="text-gray-900">{store.country || "—"}</strong></span>
+            <span>Rede: <strong className="text-gray-900">{store.affiliate_network}</strong></span>
             {store.affiliate_program && (
-              <span>Programa: <strong className="text-white">{store.affiliate_program}</strong></span>
+              <span>Programa: <strong className="text-gray-900">{store.affiliate_program}</strong></span>
             )}
-            <span>Categoria: <strong className="text-white">{store.category || "Geral"}</strong></span>
+            <span>Categoria: <strong className="text-gray-900">{store.category || "Geral"}</strong></span>
           </div>
 
           {store.description && (
-            <div className="text-xs text-white/70 mt-3 max-w-3xl leading-relaxed">
+            <div className="text-xs text-gray-700 mt-3 max-w-3xl leading-relaxed">
               {store.description}
             </div>
           )}
@@ -162,17 +162,17 @@ export function StoreDetailClient({
               key={alert.id}
               className={`p-3.5 rounded-xl border text-xs flex items-start gap-3 ${
                 alert.severity === "destructive"
-                  ? "bg-red-500/10 border-red-500/30 text-red-300"
+                  ? "bg-red-50 border-red-500/30 text-red-700"
                   : alert.severity === "warning"
-                  ? "bg-amber-500/10 border-amber-500/30 text-amber-300"
+                  ? "bg-amber-50 border-amber-200 text-amber-800"
                   : alert.severity === "success"
-                  ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-300"
-                  : "bg-blue-500/10 border-blue-500/30 text-blue-300"
+                  ? "bg-emerald-50 border-emerald-200 text-emerald-700"
+                  : "bg-blue-50 border-blue-200 text-blue-700"
               }`}
             >
               <AlertTriangle className="w-4 h-4 flex-shrink-0 mt-0.5" />
               <div>
-                <strong className="text-white font-semibold">{alert.title}: </strong>
+                <strong className="text-gray-900 font-semibold">{alert.title}: </strong>
                 <span>{alert.message}</span>
               </div>
             </div>
@@ -181,69 +181,69 @@ export function StoreDetailClient({
       )}
 
       {/* Regras e Parâmetros Cadastrais */}
-      <div className="bg-[#121216] border border-white/10 rounded-xl p-4">
-        <div className="text-xs font-bold text-white uppercase tracking-wider mb-3">
+      <div className="bg-white border border-gray-200 rounded-xl p-4">
+        <div className="text-xs font-bold text-gray-900 uppercase tracking-wider mb-3">
           Regras Contratuais & Metas de Campanha
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 text-xs">
-          <div className="bg-white/[0.02] border border-white/5 p-2.5 rounded-lg">
-            <span className="text-[10px] text-white/40 block">Brand Bidding</span>
+          <div className="bg-gray-50 border border-gray-100 p-2.5 rounded-lg">
+            <span className="text-[10px] text-gray-400 block">Brand Bidding</span>
             <div className="mt-1 flex items-center gap-1.5 font-semibold">
               {store.brand_bidding_allowed ? (
-                <span className="text-emerald-400 flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5" /> Permitido</span>
+                <span className="text-emerald-600 flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5" /> Permitido</span>
               ) : (
-                <span className="text-red-400 flex items-center gap-1"><XCircle className="w-3.5 h-3.5" /> Proibido</span>
+                <span className="text-red-600 flex items-center gap-1"><XCircle className="w-3.5 h-3.5" /> Proibido</span>
               )}
             </div>
           </div>
 
-          <div className="bg-white/[0.02] border border-white/5 p-2.5 rounded-lg">
-            <span className="text-[10px] text-white/40 block">Google Ads</span>
+          <div className="bg-gray-50 border border-gray-100 p-2.5 rounded-lg">
+            <span className="text-[10px] text-gray-400 block">Google Ads</span>
             <div className="mt-1 flex items-center gap-1.5 font-semibold">
               {store.google_ads_allowed ? (
-                <span className="text-emerald-400 flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5" /> Autorizado</span>
+                <span className="text-emerald-600 flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5" /> Autorizado</span>
               ) : (
-                <span className="text-red-400 flex items-center gap-1"><XCircle className="w-3.5 h-3.5" /> Vetado</span>
+                <span className="text-red-600 flex items-center gap-1"><XCircle className="w-3.5 h-3.5" /> Vetado</span>
               )}
             </div>
           </div>
 
-          <div className="bg-white/[0.02] border border-white/5 p-2.5 rounded-lg">
-            <span className="text-[10px] text-white/40 block">DSA (Anúncios Dinâmicos)</span>
+          <div className="bg-gray-50 border border-gray-100 p-2.5 rounded-lg">
+            <span className="text-[10px] text-gray-400 block">DSA (Anúncios Dinâmicos)</span>
             <div className="mt-1 flex items-center gap-1.5 font-semibold">
               {store.dsa_allowed ? (
-                <span className="text-teal-400 flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5" /> Permitido</span>
+                <span className="text-teal-600 flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5" /> Permitido</span>
               ) : (
-                <span className="text-white/40 flex items-center gap-1"><XCircle className="w-3.5 h-3.5" /> Desativado</span>
+                <span className="text-gray-400 flex items-center gap-1"><XCircle className="w-3.5 h-3.5" /> Desativado</span>
               )}
             </div>
           </div>
 
-          <div className="bg-white/[0.02] border border-white/5 p-2.5 rounded-lg">
-            <span className="text-[10px] text-white/40 block">Budget Diário</span>
-            <div className="mt-1 font-bold text-white">
+          <div className="bg-gray-50 border border-gray-100 p-2.5 rounded-lg">
+            <span className="text-[10px] text-gray-400 block">Budget Diário</span>
+            <div className="mt-1 font-bold text-gray-900">
               {store.daily_budget > 0 ? formatCurrency(store.daily_budget) : "Sem limite"}
             </div>
           </div>
 
-          <div className="bg-white/[0.02] border border-white/5 p-2.5 rounded-lg">
-            <span className="text-[10px] text-white/40 block">Target CPA / Max CPC</span>
-            <div className="mt-1 font-mono text-white/90">
+          <div className="bg-gray-50 border border-gray-100 p-2.5 rounded-lg">
+            <span className="text-[10px] text-gray-400 block">Target CPA / Max CPC</span>
+            <div className="mt-1 font-mono text-gray-900/90">
               {formatCurrency(store.target_cpa)} / {formatCurrency(store.max_cpc)}
             </div>
           </div>
 
-          <div className="bg-white/[0.02] border border-white/5 p-2.5 rounded-lg">
-            <span className="text-[10px] text-white/40 block">Target ROI</span>
-            <div className="mt-1 font-bold text-emerald-400">
+          <div className="bg-gray-50 border border-gray-100 p-2.5 rounded-lg">
+            <span className="text-[10px] text-gray-400 block">Target ROI</span>
+            <div className="mt-1 font-bold text-emerald-600">
               {store.target_roi > 0 ? `${store.target_roi}%` : "Livre"}
             </div>
           </div>
         </div>
 
         {store.notes && (
-          <div className="mt-3 pt-3 border-t border-white/5 text-xs text-white/60">
-            <span className="text-white/40 font-semibold">Observações internas: </span>
+          <div className="mt-3 pt-3 border-t border-gray-100 text-xs text-gray-600">
+            <span className="text-gray-400 font-semibold">Observações internas: </span>
             {store.notes}
           </div>
         )}
@@ -251,54 +251,54 @@ export function StoreDetailClient({
 
       {/* KPI Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-        <div className="bg-[#121216] border border-white/10 rounded-xl p-3.5">
-          <div className="text-[10px] uppercase font-semibold text-white/40">Gasto Ads</div>
-          <div className="text-lg font-bold text-white mt-1">{formatCurrency(metrics.ad_spend)}</div>
-          <div className="text-[10px] text-white/40 mt-0.5">{metrics.clicks} cliques</div>
+        <div className="bg-white border border-gray-200 rounded-xl p-3.5">
+          <div className="text-[10px] uppercase font-semibold text-gray-400">Gasto Ads</div>
+          <div className="text-lg font-bold text-gray-900 mt-1">{formatCurrency(metrics.ad_spend)}</div>
+          <div className="text-[10px] text-gray-400 mt-0.5">{metrics.clicks} cliques</div>
         </div>
 
-        <div className="bg-[#121216] border border-white/10 rounded-xl p-3.5">
-          <div className="text-[10px] uppercase font-semibold text-white/40">Vendas (Volume)</div>
-          <div className="text-lg font-bold text-white mt-1">{formatCurrency(metrics.total_sales_value)}</div>
-          <div className="text-[10px] text-teal-400 mt-0.5">{metrics.sales_count} aprovadas</div>
+        <div className="bg-white border border-gray-200 rounded-xl p-3.5">
+          <div className="text-[10px] uppercase font-semibold text-gray-400">Vendas (Volume)</div>
+          <div className="text-lg font-bold text-gray-900 mt-1">{formatCurrency(metrics.total_sales_value)}</div>
+          <div className="text-[10px] text-teal-600 mt-0.5">{metrics.sales_count} aprovadas</div>
         </div>
 
-        <div className="bg-[#121216] border border-white/10 rounded-xl p-3.5">
-          <div className="text-[10px] uppercase font-semibold text-white/40">Comissão</div>
-          <div className="text-lg font-bold text-purple-300 mt-1">{formatCurrency(metrics.total_commission)}</div>
-          <div className="text-[10px] text-white/40 mt-0.5">Líquida de afiliados</div>
+        <div className="bg-white border border-gray-200 rounded-xl p-3.5">
+          <div className="text-[10px] uppercase font-semibold text-gray-400">Comissão</div>
+          <div className="text-lg font-bold text-purple-700 mt-1">{formatCurrency(metrics.total_commission)}</div>
+          <div className="text-[10px] text-gray-400 mt-0.5">Líquida de afiliados</div>
         </div>
 
-        <div className="bg-[#121216] border border-white/10 rounded-xl p-3.5">
-          <div className="text-[10px] uppercase font-semibold text-white/40">Lucro Líquido</div>
+        <div className="bg-white border border-gray-200 rounded-xl p-3.5">
+          <div className="text-[10px] uppercase font-semibold text-gray-400">Lucro Líquido</div>
           <div
             className={`text-lg font-bold mt-1 ${
-              metrics.profit >= 0 ? "text-emerald-400" : "text-red-400"
+              metrics.profit >= 0 ? "text-emerald-600" : "text-red-600"
             }`}
           >
             {formatCurrency(metrics.profit)}
           </div>
-          <div className="text-[10px] text-white/40 mt-0.5">ROI: {formatPercent(metrics.roi)}</div>
+          <div className="text-[10px] text-gray-400 mt-0.5">ROI: {formatPercent(metrics.roi)}</div>
         </div>
 
-        <div className="bg-[#121216] border border-white/10 rounded-xl p-3.5">
-          <div className="text-[10px] uppercase font-semibold text-white/40">CPA / CPC</div>
-          <div className="text-lg font-bold text-white mt-1">{formatCurrency(metrics.cpa)}</div>
-          <div className="text-[10px] text-white/40 mt-0.5">CPC: {formatCurrency(metrics.cpc)}</div>
+        <div className="bg-white border border-gray-200 rounded-xl p-3.5">
+          <div className="text-[10px] uppercase font-semibold text-gray-400">CPA / CPC</div>
+          <div className="text-lg font-bold text-gray-900 mt-1">{formatCurrency(metrics.cpa)}</div>
+          <div className="text-[10px] text-gray-400 mt-0.5">CPC: {formatCurrency(metrics.cpc)}</div>
         </div>
 
-        <div className="bg-[#121216] border border-white/10 rounded-xl p-3.5">
-          <div className="text-[10px] uppercase font-semibold text-white/40">EPC / Conv.</div>
-          <div className="text-lg font-bold text-white mt-1">{formatCurrency(metrics.epc)}</div>
-          <div className="text-[10px] text-white/40 mt-0.5">{formatPercent(metrics.conversion_rate)} conv.</div>
+        <div className="bg-white border border-gray-200 rounded-xl p-3.5">
+          <div className="text-[10px] uppercase font-semibold text-gray-400">EPC / Conv.</div>
+          <div className="text-lg font-bold text-gray-900 mt-1">{formatCurrency(metrics.epc)}</div>
+          <div className="text-[10px] text-gray-400 mt-0.5">{formatPercent(metrics.conversion_rate)} conv.</div>
         </div>
       </div>
 
       {/* Gráfico Individual da Loja */}
-      <div className="bg-[#121216] border border-white/10 rounded-xl p-5 space-y-3">
-        <div className="text-sm font-bold text-white">Histórico Financeiro da Loja ({store.name})</div>
+      <div className="bg-white border border-gray-200 rounded-xl p-5 space-y-3">
+        <div className="text-sm font-bold text-gray-900">Histórico Financeiro da Loja ({store.name})</div>
         {chartData.length === 0 ? (
-          <div className="h-60 flex items-center justify-center text-white/30 text-xs border border-dashed border-white/10 rounded-lg">
+          <div className="h-60 flex items-center justify-center text-gray-400 text-xs border border-dashed border-gray-200 rounded-lg">
             Nenhum investimento ou venda lançada para esta loja até o momento.
           </div>
         ) : (
@@ -315,11 +315,11 @@ export function StoreDetailClient({
                     <stop offset="95%" stopColor="#a855f7" stopOpacity={0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" vertical={false} />
-                <XAxis dataKey="date" stroke="#ffffff40" fontSize={11} />
-                <YAxis stroke="#ffffff40" fontSize={11} tickFormatter={(v) => `R$${v}`} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e4e4e7" vertical={false} />
+                <XAxis dataKey="date" stroke="#a1a1aa" fontSize={11} />
+                <YAxis stroke="#a1a1aa" fontSize={11} tickFormatter={(v) => `R$${v}`} />
                 <Tooltip
-                  contentStyle={{ backgroundColor: "#18181b", borderColor: "#ffffff20", borderRadius: 8, fontSize: 12 }}
+                  contentStyle={{ backgroundColor: "#ffffff", borderColor: "#e4e4e7", borderRadius: 8, fontSize: 12 }}
                   formatter={(val: unknown) => [formatCurrency(Number(val) || 0), ""]}
                 />
                 <Legend iconType="circle" wrapperStyle={{ fontSize: 11 }} />
@@ -334,11 +334,11 @@ export function StoreDetailClient({
 
       {/* Tabs: Ofertas, Campanhas, Vendas */}
       <div className="space-y-4">
-        <div className="flex items-center gap-2 border-b border-white/10 pb-2">
+        <div className="flex items-center gap-2 border-b border-gray-200 pb-2">
           <button
             onClick={() => setActiveTab("overview")}
             className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${
-              activeTab === "overview" ? "bg-purple-600 text-white" : "text-white/50 hover:text-white"
+              activeTab === "overview" ? "bg-purple-600 text-white" : "text-gray-500 hover:text-gray-900"
             }`}
           >
             Visão Geral
@@ -346,7 +346,7 @@ export function StoreDetailClient({
           <button
             onClick={() => setActiveTab("offers")}
             className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors flex items-center gap-1.5 ${
-              activeTab === "offers" ? "bg-purple-600 text-white" : "text-white/50 hover:text-white"
+              activeTab === "offers" ? "bg-purple-600 text-white" : "text-gray-500 hover:text-gray-900"
             }`}
           >
             <Tag className="w-3.5 h-3.5" />
@@ -355,7 +355,7 @@ export function StoreDetailClient({
           <button
             onClick={() => setActiveTab("campaigns")}
             className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors flex items-center gap-1.5 ${
-              activeTab === "campaigns" ? "bg-purple-600 text-white" : "text-white/50 hover:text-white"
+              activeTab === "campaigns" ? "bg-purple-600 text-white" : "text-gray-500 hover:text-gray-900"
             }`}
           >
             <Megaphone className="w-3.5 h-3.5" />
@@ -364,7 +364,7 @@ export function StoreDetailClient({
           <button
             onClick={() => setActiveTab("sales")}
             className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors flex items-center gap-1.5 ${
-              activeTab === "sales" ? "bg-purple-600 text-white" : "text-white/50 hover:text-white"
+              activeTab === "sales" ? "bg-purple-600 text-white" : "text-gray-500 hover:text-gray-900"
             }`}
           >
             <ShoppingCart className="w-3.5 h-3.5" />
@@ -374,9 +374,9 @@ export function StoreDetailClient({
 
         {/* Ofertas */}
         {activeTab === "offers" && (
-          <div className="bg-[#121216] border border-white/10 rounded-xl overflow-hidden">
+          <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
             <table className="w-full text-left text-xs">
-              <thead className="bg-white/[0.03] text-white/50 border-b border-white/10 font-semibold uppercase text-[10px]">
+              <thead className="bg-gray-50 text-gray-500 border-b border-gray-200 font-semibold uppercase text-[10px]">
                 <tr>
                   <th className="py-3 px-4">Oferta</th>
                   <th className="py-3 px-3">Remuneração</th>
@@ -387,30 +387,30 @@ export function StoreDetailClient({
               <tbody className="divide-y divide-white/5">
                 {offers.length === 0 ? (
                   <tr>
-                    <td colSpan={4} className="py-8 text-center text-white/40">Nenhuma oferta vinculada.</td>
+                    <td colSpan={4} className="py-8 text-center text-gray-400">Nenhuma oferta vinculada.</td>
                   </tr>
                 ) : (
                   offers.map((offer) => (
                     <tr key={offer.id}>
                       <td className="py-3 px-4">
-                        <div className="font-semibold text-white">{offer.name}</div>
-                        <div className="text-[11px] text-white/40">{offer.description}</div>
+                        <div className="font-semibold text-gray-900">{offer.name}</div>
+                        <div className="text-[11px] text-gray-400">{offer.description}</div>
                       </td>
-                      <td className="py-3 px-3 font-medium text-purple-300">
+                      <td className="py-3 px-3 font-medium text-purple-700">
                         {offer.payout_type === "percentage" ? `${offer.payout_value}%` : formatCurrency(offer.payout_value)}
                       </td>
                       <td className="py-3 px-3">
-                        <span className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded text-[10px]">
+                        <span className="bg-emerald-50 text-emerald-600 border border-emerald-200 px-2 py-0.5 rounded text-[10px]">
                           {offer.status.toUpperCase()}
                         </span>
                       </td>
                       <td className="py-3 px-3">
                         {offer.landing_page_url ? (
-                          <a href={offer.landing_page_url} target="_blank" rel="noreferrer" className="text-blue-400 hover:underline text-[11px]">
+                          <a href={offer.landing_page_url} target="_blank" rel="noreferrer" className="text-blue-600 hover:underline text-[11px]">
                             Acessar página ↗
                           </a>
                         ) : (
-                          <span className="text-white/30">N/D</span>
+                          <span className="text-gray-400">N/D</span>
                         )}
                       </td>
                     </tr>
@@ -423,9 +423,9 @@ export function StoreDetailClient({
 
         {/* Campanhas */}
         {activeTab === "campaigns" && (
-          <div className="bg-[#121216] border border-white/10 rounded-xl overflow-hidden">
+          <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
             <table className="w-full text-left text-xs">
-              <thead className="bg-white/[0.03] text-white/50 border-b border-white/10 font-semibold uppercase text-[10px]">
+              <thead className="bg-gray-50 text-gray-500 border-b border-gray-200 font-semibold uppercase text-[10px]">
                 <tr>
                   <th className="py-3 px-4">Campanha</th>
                   <th className="py-3 px-3">ID Google Ads</th>
@@ -437,17 +437,17 @@ export function StoreDetailClient({
               <tbody className="divide-y divide-white/5">
                 {campaigns.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="py-8 text-center text-white/40">Nenhuma campanha vinculada.</td>
+                    <td colSpan={5} className="py-8 text-center text-gray-400">Nenhuma campanha vinculada.</td>
                   </tr>
                 ) : (
                   campaigns.map((camp) => (
                     <tr key={camp.id}>
-                      <td className="py-3 px-4 font-semibold text-white">{camp.name}</td>
-                      <td className="py-3 px-3 font-mono text-white/60">{camp.external_campaign_id || "Aguardando API"}</td>
-                      <td className="py-3 px-3 text-white/70">{camp.ad_group || "Padrão"}</td>
-                      <td className="py-3 px-3 text-white/50 italic">{camp.search_term || "—"}</td>
+                      <td className="py-3 px-4 font-semibold text-gray-900">{camp.name}</td>
+                      <td className="py-3 px-3 font-mono text-gray-600">{camp.external_campaign_id || "Aguardando API"}</td>
+                      <td className="py-3 px-3 text-gray-700">{camp.ad_group || "Padrão"}</td>
+                      <td className="py-3 px-3 text-gray-500 italic">{camp.search_term || "—"}</td>
                       <td className="py-3 px-3">
-                        <span className="bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded text-[10px]">
+                        <span className="bg-blue-50 text-blue-600 border border-blue-200 px-2 py-0.5 rounded text-[10px]">
                           {camp.status.toUpperCase()}
                         </span>
                       </td>
@@ -461,12 +461,12 @@ export function StoreDetailClient({
 
         {/* Vendas */}
         {(activeTab === "sales" || activeTab === "overview") && (
-          <div className="bg-[#121216] border border-white/10 rounded-xl overflow-hidden">
-            <div className="p-3.5 border-b border-white/10 text-xs font-bold text-white flex items-center justify-between">
+          <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+            <div className="p-3.5 border-b border-gray-200 text-xs font-bold text-gray-900 flex items-center justify-between">
               <span>Últimas Vendas Registradas ({sales.length})</span>
             </div>
             <table className="w-full text-left text-xs">
-              <thead className="bg-white/[0.03] text-white/50 border-b border-white/10 font-semibold uppercase text-[10px]">
+              <thead className="bg-gray-50 text-gray-500 border-b border-gray-200 font-semibold uppercase text-[10px]">
                 <tr>
                   <th className="py-3 px-4">Data / ID</th>
                   <th className="py-3 px-3">Valor Pedido</th>
@@ -479,19 +479,19 @@ export function StoreDetailClient({
               <tbody className="divide-y divide-white/5">
                 {sales.length === 0 ? (
                   <tr>
-                    <td colSpan={6} className="py-8 text-center text-white/40">Nenhuma venda cadastrada para esta loja.</td>
+                    <td colSpan={6} className="py-8 text-center text-gray-400">Nenhuma venda cadastrada para esta loja.</td>
                   </tr>
                 ) : (
                   sales.map((sale) => (
                     <tr key={sale.id}>
                       <td className="py-3 px-4">
-                        <div className="font-medium text-white">{sale.date}</div>
-                        <div className="text-[10px] text-white/40 font-mono">{sale.order_id || "Sem ID"}</div>
+                        <div className="font-medium text-gray-900">{sale.date}</div>
+                        <div className="text-[10px] text-gray-400 font-mono">{sale.order_id || "Sem ID"}</div>
                       </td>
-                      <td className="py-3 px-3 text-white font-medium">{formatCurrency(sale.sale_value)}</td>
-                      <td className="py-3 px-3 font-semibold text-purple-300">{formatCurrency(sale.commission)}</td>
+                      <td className="py-3 px-3 text-gray-900 font-medium">{formatCurrency(sale.sale_value)}</td>
+                      <td className="py-3 px-3 font-semibold text-purple-700">{formatCurrency(sale.commission)}</td>
                       <td className="py-3 px-3">
-                        <span className="bg-white/5 border border-white/10 px-2 py-0.5 rounded text-[10px] text-white/80">
+                        <span className="bg-gray-100 border border-gray-200 px-2 py-0.5 rounded text-[10px] text-gray-800">
                           {sale.origin}
                         </span>
                       </td>
@@ -499,15 +499,15 @@ export function StoreDetailClient({
                         <span
                           className={`text-[10px] font-medium px-2 py-0.5 rounded border ${
                             sale.tracking_status === "attributed"
-                              ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
-                              : "bg-amber-500/10 text-amber-400 border-amber-500/30"
+                              ? "bg-emerald-50 text-emerald-600 border-emerald-200"
+                              : "bg-amber-50 text-amber-600 border-amber-200"
                           }`}
                         >
                           {sale.tracking_status.toUpperCase()}
                         </span>
                       </td>
                       <td className="py-3 px-3">
-                        <span className="text-emerald-400 font-medium text-[11px]">{sale.status.toUpperCase()}</span>
+                        <span className="text-emerald-600 font-medium text-[11px]">{sale.status.toUpperCase()}</span>
                       </td>
                     </tr>
                   ))

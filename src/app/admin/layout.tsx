@@ -2,6 +2,12 @@ import { requireAdminUser } from "@/lib/auth-admin";
 import { AdminSidebar } from "@/components/admin/admin-sidebar";
 import { AdminHeader } from "@/components/admin/admin-header";
 import { getStores, getOffers, getCampaigns } from "@/lib/affiliate-service";
+import { Inter } from "next/font/google";
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
 
 export const metadata = {
   title: "Admin Hub | Neurautomation",
@@ -21,7 +27,9 @@ export default async function AdminLayout({
   ]);
 
   return (
-    <div className="flex min-h-screen bg-[#09090b] text-white font-sans antialiased selection:bg-purple-500 selection:text-white">
+    <div
+      className={`${inter.variable} admin-shell flex min-h-screen bg-white text-gray-900 font-[family-name:var(--font-inter)] antialiased selection:bg-purple-500 selection:text-white`}
+    >
       {/* Sidebar Lateral */}
       <AdminSidebar user={user} />
 
@@ -30,11 +38,11 @@ export default async function AdminLayout({
         <AdminHeader stores={stores} offers={offers} campaigns={campaigns} />
 
         {user.isDevBypass && (
-          <div className="bg-gradient-to-r from-amber-500/15 via-purple-500/10 to-transparent border-b border-amber-500/20 px-6 py-2 text-[11px] text-amber-200 flex items-center justify-between">
+          <div className="bg-gradient-to-r from-amber-50 via-purple-50 to-transparent border-b border-amber-200 px-6 py-2 text-[11px] text-amber-800 flex items-center justify-between">
             <div>
               <strong>Ambiente de Demonstração / Dev:</strong> Chaves do Supabase ainda não detectadas no <code>.env.local</code>. O dashboard está operando com persistência híbrida e dados simulados completos para teste imediato.
             </div>
-            <span className="font-mono text-[10px] bg-amber-500/20 px-2 py-0.5 rounded border border-amber-500/30">
+            <span className="font-mono text-[10px] bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
               SUPABASE MIGRATION READY
             </span>
           </div>

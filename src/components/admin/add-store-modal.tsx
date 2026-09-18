@@ -96,43 +96,43 @@ export function AddStoreModal({ onStoreCreated }: AddStoreModalProps) {
       <Button
         onClick={() => setIsOpen(true)}
         variant="outline"
-        className="border-white/20 bg-white/5 text-white hover:bg-white/15 text-xs h-9 px-3 rounded-lg flex items-center gap-1.5"
+        className="border-gray-300 bg-gray-100 text-gray-900 hover:bg-gray-200 text-xs h-9 px-3 rounded-lg flex items-center gap-1.5"
       >
-        <StoreIcon className="w-3.5 h-3.5 text-blue-400" />
+        <StoreIcon className="w-3.5 h-3.5 text-blue-600" />
         <span>+ Nova Loja</span>
       </Button>
 
       {isOpen && (
         <ModalPortal>
-          <div className="bg-[#121216] border border-white/10 rounded-xl w-full max-w-xl max-h-[90vh] overflow-y-auto p-6 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-5">
+          <div className="bg-white border border-gray-200 rounded-xl w-full max-w-xl max-h-[90vh] overflow-y-auto p-6 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-gray-200 pb-4 mb-5">
               <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400">
+                <div className="p-2 rounded-lg bg-blue-50 border border-blue-200 text-blue-600">
                   <StoreIcon className="w-5 h-5" />
                 </div>
                 <div>
-                  <h2 className="text-base font-semibold text-white">Cadastrar Nova Loja Afiliada</h2>
-                  <p className="text-xs text-white/50">Defina os parâmetros de orçamento, metas e permissões</p>
+                  <h2 className="text-base font-semibold text-gray-900">Cadastrar Nova Loja Afiliada</h2>
+                  <p className="text-xs text-gray-500">Defina os parâmetros de orçamento, metas e permissões</p>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
-                className="text-white/40 hover:text-white text-lg font-light"
+                className="text-gray-400 hover:text-gray-900 text-lg font-light"
               >
                 ✕
               </button>
             </div>
 
             {error && (
-              <div className="mb-4 p-3 bg-red-500/10 border border-red-500/30 text-red-400 rounded-lg text-xs flex items-center gap-2">
+              <div className="mb-4 p-3 bg-red-50 border border-red-500/30 text-red-600 rounded-lg text-xs flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 flex-shrink-0" />
                 <span>{error}</span>
               </div>
             )}
 
             {success && (
-              <div className="mb-4 p-3 bg-teal-500/10 border border-teal-500/30 text-teal-300 rounded-lg text-xs">
+              <div className="mb-4 p-3 bg-teal-50 border border-teal-200 text-teal-700 rounded-lg text-xs">
                 ✓ Loja cadastrada com sucesso!
               </div>
             )}
@@ -140,97 +140,97 @@ export function AddStoreModal({ onStoreCreated }: AddStoreModalProps) {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-white/70 mb-1.5">Nome da Loja *</label>
+                  <label className="block text-xs font-medium text-gray-700 mb-1.5">Nome da Loja *</label>
                   <input
                     type="text"
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Ex: Nike Brasil, Sephora, Amazon"
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500"
+                    className="w-full bg-gray-100 border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 focus:outline-none focus:border-blue-500"
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-medium text-white/70 mb-1.5">País</label>
+                    <label className="block text-xs font-medium text-gray-700 mb-1.5">País</label>
                     <input
                       type="text"
                       value={country}
                       onChange={(e) => setCountry(e.target.value)}
                       placeholder="Ex: Brasil, EUA"
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500"
+                      className="w-full bg-gray-100 border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 focus:outline-none focus:border-blue-500"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-white/70 mb-1.5">Categoria</label>
+                    <label className="block text-xs font-medium text-gray-700 mb-1.5">Categoria</label>
                     <input
                       type="text"
                       value={category}
                       onChange={(e) => setCategory(e.target.value)}
                       placeholder="Ex: Moda & Esportes, Eletrônicos"
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500"
+                      className="w-full bg-gray-100 border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 focus:outline-none focus:border-blue-500"
                     />
                   </div>
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-white/70 mb-1.5">Descrição da Loja</label>
+                <label className="block text-xs font-medium text-gray-700 mb-1.5">Descrição da Loja</label>
                 <textarea
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   rows={2}
                   placeholder="Breve descrição da loja, posicionamento e público..."
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500 placeholder:text-white/30"
+                  className="w-full bg-gray-100 border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 focus:outline-none focus:border-blue-500 placeholder:text-gray-400"
                 />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 <div>
-                  <label className="block text-xs font-medium text-white/70 mb-1.5">Rede de Afiliados *</label>
+                  <label className="block text-xs font-medium text-gray-700 mb-1.5">Rede de Afiliados *</label>
                   <input
                     type="text"
                     required
                     value={affiliateNetwork}
                     onChange={(e) => setAffiliateNetwork(e.target.value)}
                     placeholder="Awin, Lomadee, Rakuten, CJ"
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500"
+                    className="w-full bg-gray-100 border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 focus:outline-none focus:border-blue-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-white/70 mb-1.5">Programa / ID</label>
+                  <label className="block text-xs font-medium text-gray-700 mb-1.5">Programa / ID</label>
                   <input
                     type="text"
                     value={affiliateProgram}
                     onChange={(e) => setAffiliateProgram(e.target.value)}
                     placeholder="Ex: Nike Oficial #1234"
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500"
+                    className="w-full bg-gray-100 border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 focus:outline-none focus:border-blue-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-white/70 mb-1.5">Status Inicial</label>
+                  <label className="block text-xs font-medium text-gray-700 mb-1.5">Status Inicial</label>
                   <select
                     value={status}
                     onChange={(e) => setStatus(e.target.value as StoreStatus)}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500"
+                    className="w-full bg-gray-100 border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 focus:outline-none focus:border-blue-500"
                   >
-                    <option value="testing" className="bg-[#18181b] text-white">Testing (Em Teste)</option>
-                    <option value="active" className="bg-[#18181b] text-white">Active (Ativa)</option>
-                    <option value="paused" className="bg-[#18181b] text-white">Paused (Pausada)</option>
-                    <option value="archived" className="bg-[#18181b] text-white">Archived (Arquivada)</option>
+                    <option value="testing" className="bg-white text-gray-900">Testing (Em Teste)</option>
+                    <option value="active" className="bg-white text-gray-900">Active (Ativa)</option>
+                    <option value="paused" className="bg-white text-gray-900">Paused (Pausada)</option>
+                    <option value="archived" className="bg-white text-gray-900">Archived (Arquivada)</option>
                   </select>
                 </div>
               </div>
 
               {/* Metas e Orçamentos */}
-              <div className="p-3.5 bg-white/[0.02] border border-white/10 rounded-lg space-y-3">
-                <div className="text-xs font-semibold text-white/80">Controle Orçamentário e Metas</div>
+              <div className="p-3.5 bg-gray-50 border border-gray-200 rounded-lg space-y-3">
+                <div className="text-xs font-semibold text-gray-800">Controle Orçamentário e Metas</div>
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
                   <div>
-                    <label className="block text-[10px] text-white/60 mb-1">Budget Diário (R$)</label>
+                    <label className="block text-[10px] text-gray-600 mb-1">Budget Diário (R$)</label>
                     <input
                       type="number"
                       step="1"
@@ -238,12 +238,12 @@ export function AddStoreModal({ onStoreCreated }: AddStoreModalProps) {
                       value={dailyBudget}
                       onChange={(e) => setDailyBudget(e.target.value)}
                       placeholder="500"
-                      className="w-full bg-black/40 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white"
+                      className="w-full bg-white border border-gray-200 rounded-lg px-2.5 py-1.5 text-xs text-gray-900"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-[10px] text-white/60 mb-1">Budget Mensal (R$)</label>
+                    <label className="block text-[10px] text-gray-600 mb-1">Budget Mensal (R$)</label>
                     <input
                       type="number"
                       step="1"
@@ -251,12 +251,12 @@ export function AddStoreModal({ onStoreCreated }: AddStoreModalProps) {
                       value={monthlyBudget}
                       onChange={(e) => setMonthlyBudget(e.target.value)}
                       placeholder="15000"
-                      className="w-full bg-black/40 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white"
+                      className="w-full bg-white border border-gray-200 rounded-lg px-2.5 py-1.5 text-xs text-gray-900"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-[10px] text-white/60 mb-1">Target CPA (R$)</label>
+                    <label className="block text-[10px] text-gray-600 mb-1">Target CPA (R$)</label>
                     <input
                       type="number"
                       step="0.1"
@@ -264,12 +264,12 @@ export function AddStoreModal({ onStoreCreated }: AddStoreModalProps) {
                       value={targetCpa}
                       onChange={(e) => setTargetCpa(e.target.value)}
                       placeholder="45.00"
-                      className="w-full bg-black/40 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white"
+                      className="w-full bg-white border border-gray-200 rounded-lg px-2.5 py-1.5 text-xs text-gray-900"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-[10px] text-white/60 mb-1">Max CPC (R$)</label>
+                    <label className="block text-[10px] text-gray-600 mb-1">Max CPC (R$)</label>
                     <input
                       type="number"
                       step="0.05"
@@ -277,12 +277,12 @@ export function AddStoreModal({ onStoreCreated }: AddStoreModalProps) {
                       value={maxCpc}
                       onChange={(e) => setMaxCpc(e.target.value)}
                       placeholder="2.50"
-                      className="w-full bg-black/40 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white"
+                      className="w-full bg-white border border-gray-200 rounded-lg px-2.5 py-1.5 text-xs text-gray-900"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-[10px] text-white/60 mb-1">Target ROI (%)</label>
+                    <label className="block text-[10px] text-gray-600 mb-1">Target ROI (%)</label>
                     <input
                       type="number"
                       step="5"
@@ -290,7 +290,7 @@ export function AddStoreModal({ onStoreCreated }: AddStoreModalProps) {
                       value={targetRoi}
                       onChange={(e) => setTargetRoi(e.target.value)}
                       placeholder="150"
-                      className="w-full bg-black/40 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white"
+                      className="w-full bg-white border border-gray-200 rounded-lg px-2.5 py-1.5 text-xs text-gray-900"
                     />
                   </div>
                 </div>
@@ -298,55 +298,55 @@ export function AddStoreModal({ onStoreCreated }: AddStoreModalProps) {
 
               {/* Regras e Permissões */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                <label className="flex items-center gap-2 p-2.5 bg-white/[0.02] border border-white/10 rounded-lg text-xs text-white cursor-pointer hover:bg-white/[0.04]">
+                <label className="flex items-center gap-2 p-2.5 bg-gray-50 border border-gray-200 rounded-lg text-xs text-gray-900 cursor-pointer hover:bg-gray-50">
                   <input
                     type="checkbox"
                     checked={brandBiddingAllowed}
                     onChange={(e) => setBrandBiddingAllowed(e.target.checked)}
-                    className="rounded border-white/20 text-purple-600 focus:ring-purple-500"
+                    className="rounded border-gray-300 text-purple-600 focus:ring-purple-500"
                   />
                   <span>Brand Bidding Permitido</span>
                 </label>
 
-                <label className="flex items-center gap-2 p-2.5 bg-white/[0.02] border border-white/10 rounded-lg text-xs text-white cursor-pointer hover:bg-white/[0.04]">
+                <label className="flex items-center gap-2 p-2.5 bg-gray-50 border border-gray-200 rounded-lg text-xs text-gray-900 cursor-pointer hover:bg-gray-50">
                   <input
                     type="checkbox"
                     checked={googleAdsAllowed}
                     onChange={(e) => setGoogleAdsAllowed(e.target.checked)}
-                    className="rounded border-white/20 text-blue-600 focus:ring-blue-500"
+                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                   />
                   <span>Google Ads Permitido</span>
                 </label>
 
-                <label className="flex items-center gap-2 p-2.5 bg-white/[0.02] border border-white/10 rounded-lg text-xs text-white cursor-pointer hover:bg-white/[0.04]">
+                <label className="flex items-center gap-2 p-2.5 bg-gray-50 border border-gray-200 rounded-lg text-xs text-gray-900 cursor-pointer hover:bg-gray-50">
                   <input
                     type="checkbox"
                     checked={dsaAllowed}
                     onChange={(e) => setDsaAllowed(e.target.checked)}
-                    className="rounded border-white/20 text-teal-600 focus:ring-teal-500"
+                    className="rounded border-gray-300 text-teal-600 focus:ring-teal-500"
                   />
                   <span>DSA Permitido</span>
                 </label>
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-white/70 mb-1.5">Notas e Regras Específicas</label>
+                <label className="block text-xs font-medium text-gray-700 mb-1.5">Notas e Regras Específicas</label>
                 <textarea
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   rows={2}
                   placeholder="Restrições da rede, termos contratuais, palavras-chave negativas obrigatórias..."
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500 placeholder:text-white/30"
+                  className="w-full bg-gray-100 border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 focus:outline-none focus:border-blue-500 placeholder:text-gray-400"
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-3 pt-3 border-t border-white/10">
+              <div className="flex items-center justify-end gap-3 pt-3 border-t border-gray-200">
                 <Button
                   type="button"
                   variant="outline"
                   size="sm"
                   onClick={() => setIsOpen(false)}
-                  className="border-white/10 text-white/60 hover:text-white hover:bg-white/5"
+                  className="border-gray-200 text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                 >
                   Cancelar
                 </Button>

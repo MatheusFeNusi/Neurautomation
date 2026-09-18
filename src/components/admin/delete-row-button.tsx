@@ -36,12 +36,12 @@ export function DeleteRowButton({ endpoint, onDeleted, label = "Excluir" }: Dele
         type="button"
         onClick={handleClick}
         disabled={loading}
-        className="inline-flex items-center gap-1 text-[11px] text-red-400/80 hover:text-red-300 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 px-2.5 py-1 rounded transition-colors disabled:opacity-50"
+        className="inline-flex items-center gap-1 text-[11px] text-red-600/80 hover:text-red-700 bg-red-50 hover:bg-red-500/20 border border-red-500/20 px-2.5 py-1 rounded transition-colors disabled:opacity-50"
       >
         {loading ? <Loader2 className="w-3 h-3 animate-spin" /> : <Trash2 className="w-3 h-3" />}
         <span>{label}</span>
       </button>
-      {error && <span className="text-[10px] text-red-400">{error}</span>}
+      {error && <span className="text-[10px] text-red-600">{error}</span>}
     </div>
   );
 }

@@ -26,23 +26,23 @@ export function TestingClient({ stores, offers, campaigns, adSpends, sales }: Te
 
   return (
     <div className="space-y-6">
-      <div className="border-b border-white/10 pb-5">
-        <h1 className="text-2xl font-bold text-white tracking-tight flex items-center gap-2.5">
+      <div className="border-b border-gray-200 pb-5">
+        <h1 className="text-2xl font-bold text-gray-900 tracking-tight flex items-center gap-2.5">
           <span>Laboratório de Validação (Testing Hub)</span>
-          <span className="text-xs bg-blue-500/20 text-blue-300 font-medium px-2 py-0.5 rounded-full border border-blue-500/30">
+          <span className="text-xs bg-blue-50 text-blue-700 font-medium px-2 py-0.5 rounded-full border border-blue-200">
             {testingStores.length} Lojas em Validação
           </span>
         </h1>
-        <p className="text-xs text-white/50 mt-1">
+        <p className="text-xs text-gray-500 mt-1">
           Acompanhe novas lojas e ofertas antes de escalá-las para a esteira de produção ativa
         </p>
       </div>
 
       {/* Regras do Protocolo de Teste */}
-      <div className="bg-[#121216] border border-blue-500/20 rounded-xl p-4 flex items-start gap-3">
-        <Gauge className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" />
-        <div className="text-xs text-white/70">
-          <strong className="text-white font-semibold">Protocolo de Validação da Neurautomation: </strong>
+      <div className="bg-white border border-blue-200 rounded-xl p-4 flex items-start gap-3">
+        <Gauge className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+        <div className="text-xs text-gray-700">
+          <strong className="text-gray-900 font-semibold">Protocolo de Validação da Neurautomation: </strong>
           Lojas em fase de teste devem receber no mínimo 50 a 100 cliques direcionados antes de qualquer intervenção de pausa. Evite tomar decisões prematuras sem significância estatística.
         </div>
       </div>
@@ -50,8 +50,8 @@ export function TestingClient({ stores, offers, campaigns, adSpends, sales }: Te
       {/* Grid de Lojas em Teste */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {testingStores.length === 0 ? (
-          <div className="col-span-2 py-12 text-center text-white/40 bg-[#121216] border border-white/10 rounded-xl">
-            <FlaskConical className="w-8 h-8 mx-auto mb-2 text-white/20" />
+          <div className="col-span-2 py-12 text-center text-gray-400 bg-white border border-gray-200 rounded-xl">
+            <FlaskConical className="w-8 h-8 mx-auto mb-2 text-gray-300" />
             Nenhuma loja está em status de teste no momento. Todas as lojas cadastradas estão ativas ou pausadas.
           </div>
         ) : (
@@ -64,16 +64,16 @@ export function TestingClient({ stores, offers, campaigns, adSpends, sales }: Te
             const progress = Math.min(100, (m.clicks / clicksGoal) * 100);
 
             return (
-              <div key={store.id} className="bg-[#121216] border border-white/10 rounded-xl p-5 space-y-4">
+              <div key={store.id} className="bg-white border border-gray-200 rounded-xl p-5 space-y-4">
                 <div className="flex items-start justify-between">
                   <div>
-                    <h2 className="text-base font-bold text-white">{store.name}</h2>
-                    <div className="text-xs text-white/40 mt-0.5">
+                    <h2 className="text-base font-bold text-gray-900">{store.name}</h2>
+                    <div className="text-xs text-gray-400 mt-0.5">
                       {store.affiliate_network} • {store.category || "Geral"}
                     </div>
                   </div>
 
-                  <span className="text-[10px] font-semibold uppercase bg-blue-500/10 text-blue-300 border border-blue-500/20 px-2 py-0.5 rounded-full">
+                  <span className="text-[10px] font-semibold uppercase bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 rounded-full">
                     Testing
                   </span>
                 </div>
@@ -81,10 +81,10 @@ export function TestingClient({ stores, offers, campaigns, adSpends, sales }: Te
                 {/* Barra de Progresso de Amostragem */}
                 <div className="space-y-1.5">
                   <div className="flex justify-between text-[11px]">
-                    <span className="text-white/60">Amostragem de Tráfego:</span>
-                    <span className="text-white font-mono">{m.clicks} / {clicksGoal} cliques ({progress.toFixed(0)}%)</span>
+                    <span className="text-gray-600">Amostragem de Tráfego:</span>
+                    <span className="text-gray-900 font-mono">{m.clicks} / {clicksGoal} cliques ({progress.toFixed(0)}%)</span>
                   </div>
-                  <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+                  <div className="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
                     <div
                       className="h-full bg-blue-500 rounded-full transition-all"
                       style={{ width: `${progress}%` }}
@@ -93,35 +93,35 @@ export function TestingClient({ stores, offers, campaigns, adSpends, sales }: Te
                 </div>
 
                 {/* Métricas do Teste */}
-                <div className="grid grid-cols-4 gap-2 pt-2 border-t border-white/5 text-xs">
+                <div className="grid grid-cols-4 gap-2 pt-2 border-t border-gray-100 text-xs">
                   <div>
-                    <span className="text-[10px] text-white/40 block">Investimento</span>
-                    <strong className="text-white">{formatCurrency(m.ad_spend)}</strong>
+                    <span className="text-[10px] text-gray-400 block">Investimento</span>
+                    <strong className="text-gray-900">{formatCurrency(m.ad_spend)}</strong>
                   </div>
                   <div>
-                    <span className="text-[10px] text-white/40 block">Vendas</span>
-                    <strong className="text-teal-400">{m.sales_count}</strong>
+                    <span className="text-[10px] text-gray-400 block">Vendas</span>
+                    <strong className="text-teal-600">{m.sales_count}</strong>
                   </div>
                   <div>
-                    <span className="text-[10px] text-white/40 block">Comissão</span>
-                    <strong className="text-purple-300">{formatCurrency(m.total_commission)}</strong>
+                    <span className="text-[10px] text-gray-400 block">Comissão</span>
+                    <strong className="text-purple-700">{formatCurrency(m.total_commission)}</strong>
                   </div>
                   <div>
-                    <span className="text-[10px] text-white/40 block">Lucro Real</span>
-                    <strong className={m.profit >= 0 ? "text-emerald-400" : "text-red-400"}>
+                    <span className="text-[10px] text-gray-400 block">Lucro Real</span>
+                    <strong className={m.profit >= 0 ? "text-emerald-600" : "text-red-600"}>
                       {formatCurrency(m.profit)}
                     </strong>
                   </div>
                 </div>
 
-                <div className="pt-2 border-t border-white/5 flex items-center justify-between">
-                  <span className="text-[11px] text-white/50">
+                <div className="pt-2 border-t border-gray-100 flex items-center justify-between">
+                  <span className="text-[11px] text-gray-500">
                     {m.sales_count > 0 ? (
-                      <span className="text-emerald-400 flex items-center gap-1 font-medium">
+                      <span className="text-emerald-600 flex items-center gap-1 font-medium">
                         <CheckCircle2 className="w-3.5 h-3.5" /> Primeira venda validada
                       </span>
                     ) : (
-                      <span className="text-amber-400 flex items-center gap-1">
+                      <span className="text-amber-600 flex items-center gap-1">
                         <AlertCircle className="w-3.5 h-3.5" /> Aguardando primeira conversão
                       </span>
                     )}
@@ -129,7 +129,7 @@ export function TestingClient({ stores, offers, campaigns, adSpends, sales }: Te
 
                   <Link
                     href={`/admin/stores/${store.slug || store.id}`}
-                    className="inline-flex items-center gap-1 text-xs text-blue-400 hover:text-blue-300 font-medium"
+                    className="inline-flex items-center gap-1 text-xs text-blue-600 hover:text-blue-700 font-medium"
                   >
                     <span>Ver loja completa</span>
                     <ArrowRight className="w-3.5 h-3.5" />

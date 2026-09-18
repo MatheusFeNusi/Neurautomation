@@ -41,15 +41,15 @@ export function AdSpendClient({ initialAdSpends, stores, campaigns }: AdSpendCli
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 pb-5">
         <div>
-          <h1 className="text-2xl font-bold text-white tracking-tight flex items-center gap-2.5">
+          <h1 className="text-2xl font-bold text-gray-900 tracking-tight flex items-center gap-2.5">
             <span>Investimento em Anúncios (Ad Spend)</span>
-            <span className="text-xs bg-amber-500/20 text-amber-300 font-medium px-2 py-0.5 rounded-full border border-amber-500/30">
+            <span className="text-xs bg-amber-50 text-amber-800 font-medium px-2 py-0.5 rounded-full border border-amber-200">
               {filteredSpends.length} Lançamentos
             </span>
           </h1>
-          <p className="text-xs text-white/50 mt-1">
+          <p className="text-xs text-gray-500 mt-1">
             Controle diário de custos por campanha com suporte à importação manual e deduplicação
           </p>
         </div>
@@ -58,7 +58,7 @@ export function AdSpendClient({ initialAdSpends, stores, campaigns }: AdSpendCli
           <button
             onClick={() => exportAdSpendCsv(filteredSpends)}
             disabled={filteredSpends.length === 0}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-white/5 border border-white/10 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-gray-100 border border-gray-200 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
             title="Exportar gastos em CSV"
           >
             <Download className="w-3.5 h-3.5" />
@@ -70,64 +70,64 @@ export function AdSpendClient({ initialAdSpends, stores, campaigns }: AdSpendCli
 
       {/* KPI Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div className="bg-[#121216] border border-white/10 rounded-xl p-4">
-          <div className="text-[10px] uppercase font-semibold text-white/40">Total Investido</div>
-          <div className="text-xl font-bold text-amber-400 mt-1">{formatCurrency(totalCost)}</div>
-          <div className="text-[11px] text-white/40 mt-1">No período filtrado</div>
+        <div className="bg-white border border-gray-200 rounded-xl p-4">
+          <div className="text-[10px] uppercase font-semibold text-gray-400">Total Investido</div>
+          <div className="text-xl font-bold text-amber-600 mt-1">{formatCurrency(totalCost)}</div>
+          <div className="text-[11px] text-gray-400 mt-1">No período filtrado</div>
         </div>
 
-        <div className="bg-[#121216] border border-white/10 rounded-xl p-4">
-          <div className="text-[10px] uppercase font-semibold text-white/40">Cliques Comprados</div>
-          <div className="text-xl font-bold text-white mt-1">{totalClicks}</div>
-          <div className="text-[11px] text-white/40 mt-1">{totalImpressions} impressões</div>
+        <div className="bg-white border border-gray-200 rounded-xl p-4">
+          <div className="text-[10px] uppercase font-semibold text-gray-400">Cliques Comprados</div>
+          <div className="text-xl font-bold text-gray-900 mt-1">{totalClicks}</div>
+          <div className="text-[11px] text-gray-400 mt-1">{totalImpressions} impressões</div>
         </div>
 
-        <div className="bg-[#121216] border border-white/10 rounded-xl p-4">
-          <div className="text-[10px] uppercase font-semibold text-white/40">CPC Médio</div>
-          <div className="text-xl font-bold text-white mt-1">{formatCurrency(avgCpc)}</div>
-          <div className="text-[11px] text-white/40 mt-1">Custo por clique médio</div>
+        <div className="bg-white border border-gray-200 rounded-xl p-4">
+          <div className="text-[10px] uppercase font-semibold text-gray-400">CPC Médio</div>
+          <div className="text-xl font-bold text-gray-900 mt-1">{formatCurrency(avgCpc)}</div>
+          <div className="text-[11px] text-gray-400 mt-1">Custo por clique médio</div>
         </div>
 
-        <div className="bg-[#121216] border border-white/10 rounded-xl p-4">
-          <div className="text-[10px] uppercase font-semibold text-white/40">CTR Médio</div>
-          <div className="text-xl font-bold text-white mt-1">{formatPercent(avgCtr)}</div>
-          <div className="text-[11px] text-white/40 mt-1">Taxa de cliques</div>
+        <div className="bg-white border border-gray-200 rounded-xl p-4">
+          <div className="text-[10px] uppercase font-semibold text-gray-400">CTR Médio</div>
+          <div className="text-xl font-bold text-gray-900 mt-1">{formatPercent(avgCtr)}</div>
+          <div className="text-[11px] text-gray-400 mt-1">Taxa de cliques</div>
         </div>
       </div>
 
       {/* Filter Bar */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-[#121216] p-3 rounded-xl border border-white/10">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-white p-3 rounded-xl border border-gray-200">
         <div className="relative w-full sm:w-80">
-          <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-white/40" />
+          <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Buscar por campanha, loja ou data..."
-            className="w-full bg-white/5 border border-white/10 rounded-lg pl-8 pr-3 py-1.5 text-xs text-white placeholder:text-white/30 focus:outline-none focus:border-amber-500"
+            className="w-full bg-gray-100 border border-gray-200 rounded-lg pl-8 pr-3 py-1.5 text-xs text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-amber-500"
           />
         </div>
 
         <div className="flex items-center gap-2 w-full sm:w-auto">
-          <label className="text-xs text-white/60">Loja:</label>
+          <label className="text-xs text-gray-600">Loja:</label>
           <select
             value={selectedStore}
             onChange={(e) => setSelectedStore(e.target.value)}
-            className="bg-white/5 border border-white/10 rounded-lg px-2.5 py-1 text-xs text-white focus:outline-none focus:border-amber-500"
+            className="bg-gray-100 border border-gray-200 rounded-lg px-2.5 py-1 text-xs text-gray-900 focus:outline-none focus:border-amber-500"
           >
-            <option value="all" className="bg-[#18181b] text-white">Todas as Lojas</option>
+            <option value="all" className="bg-white text-gray-900">Todas as Lojas</option>
             {stores.map((s) => (
-              <option key={s.id} value={s.id} className="bg-[#18181b] text-white">{s.name}</option>
+              <option key={s.id} value={s.id} className="bg-white text-gray-900">{s.name}</option>
             ))}
           </select>
         </div>
       </div>
 
       {/* Table */}
-      <div className="bg-[#121216] border border-white/10 rounded-xl overflow-hidden shadow-xl">
+      <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-xl">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-white/[0.03] text-white/50 border-b border-white/10 font-semibold uppercase text-[10px]">
+            <thead className="bg-gray-50 text-gray-500 border-b border-gray-200 font-semibold uppercase text-[10px]">
               <tr>
                 <th className="py-3 px-4">Data</th>
                 <th className="py-3 px-3">Campanha</th>
@@ -144,8 +144,8 @@ export function AdSpendClient({ initialAdSpends, stores, campaigns }: AdSpendCli
             <tbody className="divide-y divide-white/5">
               {filteredSpends.length === 0 ? (
                 <tr>
-                  <td colSpan={10} className="py-12 text-center text-white/40">
-                    <DollarSign className="w-8 h-8 mx-auto mb-2 text-white/20" />
+                  <td colSpan={10} className="py-12 text-center text-gray-400">
+                    <DollarSign className="w-8 h-8 mx-auto mb-2 text-gray-300" />
                     Nenhum lançamento de gasto encontrado.
                   </td>
                 </tr>
@@ -157,21 +157,21 @@ export function AdSpendClient({ initialAdSpends, stores, campaigns }: AdSpendCli
                   const ctr = spend.impressions > 0 ? (spend.clicks / spend.impressions) * 100 : 0;
 
                   return (
-                    <tr key={spend.id} className="hover:bg-white/[0.02] transition-colors">
-                      <td className="py-3.5 px-4 font-mono text-white/90">{spend.date}</td>
-                      <td className="py-3.5 px-3 font-semibold text-white">
+                    <tr key={spend.id} className="hover:bg-gray-50 transition-colors">
+                      <td className="py-3.5 px-4 font-mono text-gray-900/90">{spend.date}</td>
+                      <td className="py-3.5 px-3 font-semibold text-gray-900">
                         {camp?.name || "Campanha Geral"}
                       </td>
-                      <td className="py-3.5 px-3 text-white/70">{store?.name || "Loja Geral"}</td>
-                      <td className="py-3.5 px-3 text-right font-medium text-white">{spend.clicks}</td>
-                      <td className="py-3.5 px-3 text-right text-white/60">{spend.impressions}</td>
-                      <td className="py-3.5 px-3 text-right font-mono text-white/80">{formatCurrency(cpc)}</td>
-                      <td className="py-3.5 px-3 text-right text-white/80">{formatPercent(ctr)}</td>
-                      <td className="py-3.5 px-3 text-right font-bold text-amber-400">
+                      <td className="py-3.5 px-3 text-gray-700">{store?.name || "Loja Geral"}</td>
+                      <td className="py-3.5 px-3 text-right font-medium text-gray-900">{spend.clicks}</td>
+                      <td className="py-3.5 px-3 text-right text-gray-600">{spend.impressions}</td>
+                      <td className="py-3.5 px-3 text-right font-mono text-gray-800">{formatCurrency(cpc)}</td>
+                      <td className="py-3.5 px-3 text-right text-gray-800">{formatPercent(ctr)}</td>
+                      <td className="py-3.5 px-3 text-right font-bold text-amber-600">
                         {formatCurrency(spend.cost)}
                       </td>
                       <td className="py-3.5 px-3">
-                        <span className="bg-white/5 border border-white/10 px-2 py-0.5 rounded text-[10px] text-white/70 capitalize font-mono">
+                        <span className="bg-gray-100 border border-gray-200 px-2 py-0.5 rounded text-[10px] text-gray-700 capitalize font-mono">
                           {spend.source}
                         </span>
                       </td>

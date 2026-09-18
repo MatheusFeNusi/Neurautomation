@@ -168,21 +168,21 @@ export function OverviewClient({
   return (
     <div className="space-y-6">
       {/* Top Bar: Title & Period Selector */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 pb-5">
         <div>
-          <h1 className="text-2xl font-bold text-white tracking-tight flex items-center gap-2.5">
+          <h1 className="text-2xl font-bold text-gray-900 tracking-tight flex items-center gap-2.5">
             <span>Central de Operações</span>
-            <span className="text-xs bg-purple-500/20 text-purple-300 font-medium px-2 py-0.5 rounded-full border border-purple-500/30">
+            <span className="text-xs bg-purple-50 text-purple-700 font-medium px-2 py-0.5 rounded-full border border-purple-200">
               Live Metrics
             </span>
           </h1>
-          <p className="text-xs text-white/50 mt-1">
+          <p className="text-xs text-gray-500 mt-1">
             Visão consolidada de investimento, comissões e rentabilidade para até 300 lojas
           </p>
         </div>
 
         {/* Date Filter Buttons */}
-        <div className="flex items-center gap-1 bg-white/5 p-1 rounded-xl border border-white/10 self-start">
+        <div className="flex items-center gap-1 bg-gray-100 p-1 rounded-xl border border-gray-200 self-start">
           {[
             { id: "today", label: "Hoje" },
             { id: "yesterday", label: "Ontem" },
@@ -197,7 +197,7 @@ export function OverviewClient({
               className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 period === item.id
                   ? "bg-purple-600 text-white shadow"
-                  : "text-white/60 hover:text-white hover:bg-white/5"
+                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
               }`}
             >
               {item.label}
@@ -209,8 +209,8 @@ export function OverviewClient({
       {/* Alertas Informativos Ativos */}
       {allAlerts.length > 0 && (
         <div className="space-y-2">
-          <div className="flex items-center gap-2 text-xs font-semibold text-white/70">
-            <AlertTriangle className="w-4 h-4 text-amber-400" />
+          <div className="flex items-center gap-2 text-xs font-semibold text-gray-700">
+            <AlertTriangle className="w-4 h-4 text-amber-600" />
             <span>Alertas Operacionais ({allAlerts.length})</span>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -219,17 +219,17 @@ export function OverviewClient({
                 key={alert.id}
                 className={`p-3 rounded-lg border text-xs flex items-start gap-2.5 ${
                   alert.severity === "destructive"
-                    ? "bg-red-500/10 border-red-500/20 text-red-300"
+                    ? "bg-red-50 border-red-500/20 text-red-700"
                     : alert.severity === "warning"
-                    ? "bg-amber-500/10 border-amber-500/20 text-amber-300"
+                    ? "bg-amber-50 border-amber-200 text-amber-800"
                     : alert.severity === "success"
-                    ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-300"
-                    : "bg-blue-500/10 border-blue-500/20 text-blue-300"
+                    ? "bg-emerald-50 border-emerald-200 text-emerald-700"
+                    : "bg-blue-50 border-blue-200 text-blue-700"
                 }`}
               >
                 <ShieldAlert className="w-4 h-4 flex-shrink-0 mt-0.5" />
                 <div>
-                  <div className="font-semibold text-white">
+                  <div className="font-semibold text-gray-900">
                     {alert.store_name} — {alert.title}
                   </div>
                   <div className="text-[11px] opacity-80 mt-0.5">{alert.message}</div>
@@ -243,70 +243,70 @@ export function OverviewClient({
       {/* Primary KPI Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Total Gasto */}
-        <div className="bg-[#121216] border border-white/10 rounded-xl p-4 relative overflow-hidden">
-          <div className="flex items-center justify-between text-white/50 text-xs">
+        <div className="bg-white border border-gray-200 rounded-xl p-4 relative overflow-hidden">
+          <div className="flex items-center justify-between text-gray-500 text-xs">
             <span>Investimento em Ads</span>
-            <DollarSign className="w-4 h-4 text-amber-400" />
+            <DollarSign className="w-4 h-4 text-amber-600" />
           </div>
-          <div className="text-xl font-bold text-white mt-2">
+          <div className="text-xl font-bold text-gray-900 mt-2">
             {formatCurrency(metrics.ad_spend)}
           </div>
-          <div className="text-[11px] text-white/40 mt-1">
+          <div className="text-[11px] text-gray-400 mt-1">
             Google Ads & Fontes Diretas
           </div>
           <div className="absolute right-0 bottom-0 w-24 h-24 bg-amber-500/5 rounded-full blur-2xl pointer-events-none" />
         </div>
 
         {/* Total Vendas Faturadas */}
-        <div className="bg-[#121216] border border-white/10 rounded-xl p-4 relative overflow-hidden">
-          <div className="flex items-center justify-between text-white/50 text-xs">
+        <div className="bg-white border border-gray-200 rounded-xl p-4 relative overflow-hidden">
+          <div className="flex items-center justify-between text-gray-500 text-xs">
             <span>Volume de Vendas</span>
-            <ShoppingCart className="w-4 h-4 text-blue-400" />
+            <ShoppingCart className="w-4 h-4 text-blue-600" />
           </div>
-          <div className="text-xl font-bold text-white mt-2">
+          <div className="text-xl font-bold text-gray-900 mt-2">
             {formatCurrency(metrics.total_sales_value)}
           </div>
-          <div className="text-[11px] text-teal-400 mt-1 flex items-center gap-1">
+          <div className="text-[11px] text-teal-600 mt-1 flex items-center gap-1">
             <span>{metrics.sales_count} vendas confirmadas</span>
           </div>
           <div className="absolute right-0 bottom-0 w-24 h-24 bg-blue-500/5 rounded-full blur-2xl pointer-events-none" />
         </div>
 
         {/* Total Comissão Recebida */}
-        <div className="bg-[#121216] border border-white/10 rounded-xl p-4 relative overflow-hidden">
-          <div className="flex items-center justify-between text-white/50 text-xs">
+        <div className="bg-white border border-gray-200 rounded-xl p-4 relative overflow-hidden">
+          <div className="flex items-center justify-between text-gray-500 text-xs">
             <span>Comissão Líquida</span>
-            <Flame className="w-4 h-4 text-purple-400" />
+            <Flame className="w-4 h-4 text-purple-600" />
           </div>
-          <div className="text-xl font-bold text-purple-300 mt-2">
+          <div className="text-xl font-bold text-purple-700 mt-2">
             {formatCurrency(metrics.total_commission)}
           </div>
-          <div className="text-[11px] text-white/40 mt-1">
+          <div className="text-[11px] text-gray-400 mt-1">
             Média {metrics.sales_count > 0 ? formatCurrency(metrics.total_commission / metrics.sales_count) : "R$ 0"} / venda
           </div>
           <div className="absolute right-0 bottom-0 w-24 h-24 bg-purple-500/5 rounded-full blur-2xl pointer-events-none" />
         </div>
 
         {/* Lucro Líquido Real */}
-        <div className="bg-[#121216] border border-white/10 rounded-xl p-4 relative overflow-hidden">
-          <div className="flex items-center justify-between text-white/50 text-xs">
+        <div className="bg-white border border-gray-200 rounded-xl p-4 relative overflow-hidden">
+          <div className="flex items-center justify-between text-gray-500 text-xs">
             <span>Lucro Líquido Real</span>
-            <TrendingUp className="w-4 h-4 text-emerald-400" />
+            <TrendingUp className="w-4 h-4 text-emerald-600" />
           </div>
           <div
             className={`text-xl font-bold mt-2 ${
-              metrics.profit >= 0 ? "text-emerald-400" : "text-red-400"
+              metrics.profit >= 0 ? "text-emerald-600" : "text-red-600"
             }`}
           >
             {formatCurrency(metrics.profit)}
           </div>
           <div className="text-[11px] mt-1 flex items-center gap-1">
             {metrics.profit >= 0 ? (
-              <span className="text-emerald-400 flex items-center">
+              <span className="text-emerald-600 flex items-center">
                 <ArrowUpRight className="w-3 h-3" /> ROI {formatPercent(metrics.roi)}
               </span>
             ) : (
-              <span className="text-red-400 flex items-center">
+              <span className="text-red-600 flex items-center">
                 <ArrowDownRight className="w-3 h-3" /> Prejuízo
               </span>
             )}
@@ -317,60 +317,60 @@ export function OverviewClient({
 
       {/* Secondary Efficiency Metrics (CPA, CPC, EPC, ROAS, Conversão) */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-        <div className="bg-white/[0.02] border border-white/10 rounded-lg p-3">
-          <div className="text-[10px] uppercase font-semibold text-white/40">ROI Geral</div>
-          <div className="text-base font-bold text-white mt-1">{formatPercent(metrics.roi)}</div>
-          <div className="text-[10px] text-white/40 mt-0.5">Retorno s/ gasto</div>
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
+          <div className="text-[10px] uppercase font-semibold text-gray-400">ROI Geral</div>
+          <div className="text-base font-bold text-gray-900 mt-1">{formatPercent(metrics.roi)}</div>
+          <div className="text-[10px] text-gray-400 mt-0.5">Retorno s/ gasto</div>
         </div>
 
-        <div className="bg-white/[0.02] border border-white/10 rounded-lg p-3">
-          <div className="text-[10px] uppercase font-semibold text-white/40">CPA Médio</div>
-          <div className="text-base font-bold text-white mt-1">{formatCurrency(metrics.cpa)}</div>
-          <div className="text-[10px] text-white/40 mt-0.5">Custo por aquisição</div>
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
+          <div className="text-[10px] uppercase font-semibold text-gray-400">CPA Médio</div>
+          <div className="text-base font-bold text-gray-900 mt-1">{formatCurrency(metrics.cpa)}</div>
+          <div className="text-[10px] text-gray-400 mt-0.5">Custo por aquisição</div>
         </div>
 
-        <div className="bg-white/[0.02] border border-white/10 rounded-lg p-3">
-          <div className="text-[10px] uppercase font-semibold text-white/40">EPC</div>
-          <div className="text-base font-bold text-white mt-1">{formatCurrency(metrics.epc)}</div>
-          <div className="text-[10px] text-white/40 mt-0.5">Ganho por clique</div>
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
+          <div className="text-[10px] uppercase font-semibold text-gray-400">EPC</div>
+          <div className="text-base font-bold text-gray-900 mt-1">{formatCurrency(metrics.epc)}</div>
+          <div className="text-[10px] text-gray-400 mt-0.5">Ganho por clique</div>
         </div>
 
-        <div className="bg-white/[0.02] border border-white/10 rounded-lg p-3">
-          <div className="text-[10px] uppercase font-semibold text-white/40">CPC Médio</div>
-          <div className="text-base font-bold text-white mt-1">{formatCurrency(metrics.cpc)}</div>
-          <div className="text-[10px] text-white/40 mt-0.5">{metrics.clicks} cliques</div>
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
+          <div className="text-[10px] uppercase font-semibold text-gray-400">CPC Médio</div>
+          <div className="text-base font-bold text-gray-900 mt-1">{formatCurrency(metrics.cpc)}</div>
+          <div className="text-[10px] text-gray-400 mt-0.5">{metrics.clicks} cliques</div>
         </div>
 
-        <div className="bg-white/[0.02] border border-white/10 rounded-lg p-3">
-          <div className="text-[10px] uppercase font-semibold text-white/40">Taxa Conversão</div>
-          <div className="text-base font-bold text-white mt-1">{formatPercent(metrics.conversion_rate)}</div>
-          <div className="text-[10px] text-white/40 mt-0.5">Cliques p/ venda</div>
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
+          <div className="text-[10px] uppercase font-semibold text-gray-400">Taxa Conversão</div>
+          <div className="text-base font-bold text-gray-900 mt-1">{formatPercent(metrics.conversion_rate)}</div>
+          <div className="text-[10px] text-gray-400 mt-0.5">Cliques p/ venda</div>
         </div>
 
-        <div className="bg-white/[0.02] border border-white/10 rounded-lg p-3">
-          <div className="text-[10px] uppercase font-semibold text-white/40">Lojas Ativas / Teste</div>
-          <div className="text-base font-bold text-white mt-1">
-            <span className="text-emerald-400">{activeStoresCount}</span>
-            <span className="text-white/40 text-xs"> / </span>
-            <span className="text-blue-400">{testingStoresCount}</span>
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
+          <div className="text-[10px] uppercase font-semibold text-gray-400">Lojas Ativas / Teste</div>
+          <div className="text-base font-bold text-gray-900 mt-1">
+            <span className="text-emerald-600">{activeStoresCount}</span>
+            <span className="text-gray-400 text-xs"> / </span>
+            <span className="text-blue-600">{testingStoresCount}</span>
           </div>
-          <div className="text-[10px] text-white/40 mt-0.5">{initialStores.length} total cadastradas</div>
+          <div className="text-[10px] text-gray-400 mt-0.5">{initialStores.length} total cadastradas</div>
         </div>
       </div>
 
       {/* Visual Charts Section */}
-      <div className="bg-[#121216] border border-white/10 rounded-xl p-5 space-y-4">
-        <div className="flex items-center justify-between border-b border-white/10 pb-3">
+      <div className="bg-white border border-gray-200 rounded-xl p-5 space-y-4">
+        <div className="flex items-center justify-between border-b border-gray-200 pb-3">
           <div>
-            <h2 className="text-sm font-bold text-white">Evolução Diária de Performance</h2>
-            <p className="text-xs text-white/40">Cruzamento de custos de tráfego, vendas e margem líquida</p>
+            <h2 className="text-sm font-bold text-gray-900">Evolução Diária de Performance</h2>
+            <p className="text-xs text-gray-400">Cruzamento de custos de tráfego, vendas e margem líquida</p>
           </div>
 
-          <div className="flex items-center gap-1 bg-white/5 p-0.5 rounded-lg border border-white/10">
+          <div className="flex items-center gap-1 bg-gray-100 p-0.5 rounded-lg border border-gray-200">
             <button
               onClick={() => setActiveTab("finance")}
               className={`px-3 py-1 text-xs rounded-md transition-colors ${
-                activeTab === "finance" ? "bg-white/15 text-white font-medium" : "text-white/50 hover:text-white"
+                activeTab === "finance" ? "bg-gray-200 text-gray-900 font-medium" : "text-gray-500 hover:text-gray-900"
               }`}
             >
               Financeiro (R$)
@@ -378,7 +378,7 @@ export function OverviewClient({
             <button
               onClick={() => setActiveTab("traffic")}
               className={`px-3 py-1 text-xs rounded-md transition-colors ${
-                activeTab === "traffic" ? "bg-white/15 text-white font-medium" : "text-white/50 hover:text-white"
+                activeTab === "traffic" ? "bg-gray-200 text-gray-900 font-medium" : "text-gray-500 hover:text-gray-900"
               }`}
             >
               Tráfego & Vendas
@@ -387,10 +387,10 @@ export function OverviewClient({
         </div>
 
         {chartData.length === 0 ? (
-          <div className="h-72 flex flex-col items-center justify-center text-white/40 text-xs border border-dashed border-white/10 rounded-lg">
-            <MousePointerClick className="w-8 h-8 text-white/20 mb-2" />
+          <div className="h-72 flex flex-col items-center justify-center text-gray-400 text-xs border border-dashed border-gray-200 rounded-lg">
+            <MousePointerClick className="w-8 h-8 text-gray-300 mb-2" />
             <span>Nenhum dado diário lançado para o período selecionado.</span>
-            <span className="text-[11px] text-white/30 mt-1">
+            <span className="text-[11px] text-gray-400 mt-1">
               Use os botões &quot;+ Nova Venda&quot; e &quot;+ Lançar Gasto&quot; no topo para alimentar o gráfico.
             </span>
           </div>
@@ -412,11 +412,11 @@ export function OverviewClient({
                     <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" vertical={false} />
-                <XAxis dataKey="date" stroke="#ffffff40" fontSize={11} />
-                <YAxis stroke="#ffffff40" fontSize={11} tickFormatter={(val) => `R$${val}`} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e4e4e7" vertical={false} />
+                <XAxis dataKey="date" stroke="#a1a1aa" fontSize={11} />
+                <YAxis stroke="#a1a1aa" fontSize={11} tickFormatter={(val) => `R$${val}`} />
                 <Tooltip
-                  contentStyle={{ backgroundColor: "#18181b", borderColor: "#ffffff20", borderRadius: 8, fontSize: 12 }}
+                  contentStyle={{ backgroundColor: "#ffffff", borderColor: "#e4e4e7", borderRadius: 8, fontSize: 12 }}
                   formatter={(val: unknown) => [formatCurrency(Number(val) || 0), ""]}
                 />
                 <Legend iconType="circle" wrapperStyle={{ fontSize: 11, paddingTop: 10 }} />
@@ -430,12 +430,12 @@ export function OverviewClient({
           <div className="h-72 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" vertical={false} />
-                <XAxis dataKey="date" stroke="#ffffff40" fontSize={11} />
-                <YAxis yAxisId="left" stroke="#ffffff40" fontSize={11} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e4e4e7" vertical={false} />
+                <XAxis dataKey="date" stroke="#a1a1aa" fontSize={11} />
+                <YAxis yAxisId="left" stroke="#a1a1aa" fontSize={11} />
                 <YAxis yAxisId="right" orientation="right" stroke="#a855f7" fontSize={11} />
                 <Tooltip
-                  contentStyle={{ backgroundColor: "#18181b", borderColor: "#ffffff20", borderRadius: 8, fontSize: 12 }}
+                  contentStyle={{ backgroundColor: "#ffffff", borderColor: "#e4e4e7", borderRadius: 8, fontSize: 12 }}
                 />
                 <Legend iconType="circle" wrapperStyle={{ fontSize: 11, paddingTop: 10 }} />
                 <Bar yAxisId="left" dataKey="clicks" name="Cliques" fill="#3b82f6" radius={[4, 4, 0, 0]} />
@@ -448,18 +448,18 @@ export function OverviewClient({
 
       {/* Top Stores Ranking Table */}
       {initialStores.length > 0 && (
-        <div className="bg-[#121216] border border-white/10 rounded-xl overflow-hidden">
-          <div className="flex items-center justify-between p-4 border-b border-white/10">
+        <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+          <div className="flex items-center justify-between p-4 border-b border-gray-200">
             <div className="flex items-center gap-2">
-              <Trophy className="w-4 h-4 text-amber-400" />
-              <h2 className="text-sm font-bold text-white">Ranking de Lojas — Período Selecionado</h2>
-              <span className="text-[10px] bg-white/5 text-white/40 border border-white/10 px-1.5 py-0.5 rounded">
+              <Trophy className="w-4 h-4 text-amber-600" />
+              <h2 className="text-sm font-bold text-gray-900">Ranking de Lojas — Período Selecionado</h2>
+              <span className="text-[10px] bg-gray-100 text-gray-400 border border-gray-200 px-1.5 py-0.5 rounded">
                 {initialStores.length} lojas
               </span>
             </div>
             <Link
               href="/admin/performance"
-              className="text-xs text-purple-400 hover:text-purple-300 flex items-center gap-1 transition-colors"
+              className="text-xs text-purple-600 hover:text-purple-700 flex items-center gap-1 transition-colors"
             >
               <span>Ver Matriz Completa</span>
               <ExternalLink className="w-3 h-3" />
@@ -469,24 +469,24 @@ export function OverviewClient({
           <div className="overflow-x-auto">
             <table className="w-full text-xs">
               <thead>
-                <tr className="border-b border-white/5">
-                  <th className="text-left px-4 py-2.5 text-white/40 font-semibold uppercase text-[10px] tracking-wide w-8">#</th>
-                  <th className="text-left px-4 py-2.5 text-white/40 font-semibold uppercase text-[10px] tracking-wide">Loja</th>
-                  <th className="text-right px-4 py-2.5 text-white/40 font-semibold uppercase text-[10px] tracking-wide">Gasto</th>
-                  <th className="text-right px-4 py-2.5 text-white/40 font-semibold uppercase text-[10px] tracking-wide">Comissão</th>
-                  <th className="text-right px-4 py-2.5 text-white/40 font-semibold uppercase text-[10px] tracking-wide">Lucro</th>
-                  <th className="text-right px-4 py-2.5 text-white/40 font-semibold uppercase text-[10px] tracking-wide">ROI</th>
-                  <th className="text-right px-4 py-2.5 text-white/40 font-semibold uppercase text-[10px] tracking-wide">CPA</th>
-                  <th className="text-center px-4 py-2.5 text-white/40 font-semibold uppercase text-[10px] tracking-wide">Status</th>
+                <tr className="border-b border-gray-100">
+                  <th className="text-left px-4 py-2.5 text-gray-400 font-semibold uppercase text-[10px] tracking-wide w-8">#</th>
+                  <th className="text-left px-4 py-2.5 text-gray-400 font-semibold uppercase text-[10px] tracking-wide">Loja</th>
+                  <th className="text-right px-4 py-2.5 text-gray-400 font-semibold uppercase text-[10px] tracking-wide">Gasto</th>
+                  <th className="text-right px-4 py-2.5 text-gray-400 font-semibold uppercase text-[10px] tracking-wide">Comissão</th>
+                  <th className="text-right px-4 py-2.5 text-gray-400 font-semibold uppercase text-[10px] tracking-wide">Lucro</th>
+                  <th className="text-right px-4 py-2.5 text-gray-400 font-semibold uppercase text-[10px] tracking-wide">ROI</th>
+                  <th className="text-right px-4 py-2.5 text-gray-400 font-semibold uppercase text-[10px] tracking-wide">CPA</th>
+                  <th className="text-center px-4 py-2.5 text-gray-400 font-semibold uppercase text-[10px] tracking-wide">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/[0.04]">
+              <tbody className="divide-y divide-gray-100">
                 {storeRankingRows.map(({ store, metrics }, idx) => (
-                  <tr key={store.id} className="hover:bg-white/[0.02] transition-colors group">
-                    <td className="px-4 py-3 text-white/40 font-mono">
+                  <tr key={store.id} className="hover:bg-gray-50 transition-colors group">
+                    <td className="px-4 py-3 text-gray-400 font-mono">
                       {idx + 1 <= 3 ? (
                         <span className={`font-bold ${
-                          idx === 0 ? 'text-amber-400' : idx === 1 ? 'text-white/60' : 'text-amber-700'
+                          idx === 0 ? 'text-amber-600' : idx === 1 ? 'text-gray-600' : 'text-amber-700'
                         }`}>{idx + 1}°</span>
                       ) : (
                         <span>{idx + 1}°</span>
@@ -495,46 +495,46 @@ export function OverviewClient({
                     <td className="px-4 py-3">
                       <Link
                         href={`/admin/stores/${store.slug}`}
-                        className="font-semibold text-white group-hover:text-purple-300 transition-colors flex items-center gap-1.5"
+                        className="font-semibold text-gray-900 group-hover:text-purple-700 transition-colors flex items-center gap-1.5"
                       >
                         {store.name}
                         <ExternalLink className="w-2.5 h-2.5 opacity-0 group-hover:opacity-50 transition-opacity" />
                       </Link>
-                      <div className="text-[10px] text-white/30 mt-0.5">{store.affiliate_network} • {store.category}</div>
+                      <div className="text-[10px] text-gray-400 mt-0.5">{store.affiliate_network} • {store.category}</div>
                     </td>
                     <td className="px-4 py-3 text-right">
-                      <span className="text-amber-300 font-mono">{formatCurrency(metrics.ad_spend)}</span>
+                      <span className="text-amber-800 font-mono">{formatCurrency(metrics.ad_spend)}</span>
                     </td>
                     <td className="px-4 py-3 text-right">
-                      <span className="text-purple-300 font-mono">{formatCurrency(metrics.total_commission)}</span>
-                      <div className="text-[10px] text-white/30">{metrics.sales_count} vendas</div>
+                      <span className="text-purple-700 font-mono">{formatCurrency(metrics.total_commission)}</span>
+                      <div className="text-[10px] text-gray-400">{metrics.sales_count} vendas</div>
                     </td>
                     <td className="px-4 py-3 text-right">
                       <span className={`font-bold font-mono ${
-                        metrics.profit >= 0 ? 'text-emerald-400' : 'text-red-400'
+                        metrics.profit >= 0 ? 'text-emerald-600' : 'text-red-600'
                       }`}>
                         {formatCurrency(metrics.profit)}
                       </span>
                     </td>
                     <td className="px-4 py-3 text-right">
                       <span className={`font-mono text-xs ${
-                        metrics.roi >= 0 ? 'text-emerald-300' : 'text-red-300'
+                        metrics.roi >= 0 ? 'text-emerald-700' : 'text-red-700'
                       }`}>
                         {formatPercent(metrics.roi)}
                       </span>
                     </td>
                     <td className="px-4 py-3 text-right">
-                      <span className="text-white/60 font-mono">{formatCurrency(metrics.cpa)}</span>
+                      <span className="text-gray-600 font-mono">{formatCurrency(metrics.cpa)}</span>
                     </td>
                     <td className="px-4 py-3 text-center">
                       <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${
                         store.status === 'active'
-                          ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+                          ? 'bg-emerald-50 text-emerald-600 border-emerald-200'
                           : store.status === 'testing'
-                          ? 'bg-blue-500/10 text-blue-400 border-blue-500/20'
+                          ? 'bg-blue-50 text-blue-600 border-blue-200'
                           : store.status === 'paused'
-                          ? 'bg-amber-500/10 text-amber-400 border-amber-500/20'
-                          : 'bg-white/5 text-white/40 border-white/10'
+                          ? 'bg-amber-50 text-amber-600 border-amber-200'
+                          : 'bg-gray-100 text-gray-400 border-gray-200'
                       }`}>
                         {store.status.toUpperCase()}
                       </span>
